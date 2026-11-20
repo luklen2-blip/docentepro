@@ -1,0 +1,9 @@
+node_modules/
+.git/
+*.log
+.system_generated/
+scratch/
+cloudflared.exe
+*.zip
+.DS_Store
+public_tunnel_url.txt

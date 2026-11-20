@@ -1,0 +1,22 @@
+{
+  "name": "docente-pro",
+  "version": "2.0.0",
+  "description": "DocentePro - Plataforma SaaS de Gestão, Triagem TikTok e Cobrança Automática para Professores Particulares",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/run_all.js"
+  },
+  "keywords": [
+    "saas",
+    "educacao",
+    "professores-particulares",
+    "tiktok-funnel",
+    "pix",
+    "ingles",
+    "portugues",
+    "recorrencia"
+  ],
+  "author": "Luciano",
+  "license": "ISC"
+}

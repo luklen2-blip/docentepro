@@ -1,0 +1,2927 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DocentePro - Gestão, Triagem TikTok & Cobrança Automática</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .tiktok-badge {
+        background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+    <!-- Top Navigation & Role Switcher Bar -->
+    <header
+      class="bg-slate-800/90 backdrop-blur border-b border-slate-700 sticky top-0 z-50"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-emerald-400 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/20"
+          >
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div>
+            <span
+              class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-300 bg-clip-text text-transparent"
+              >DocentePro</span
+            >
+            <span
+              class="text-xs ml-2 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold"
+              >SaaS 24/7</span
+            >
+          </div>
+        </div>
+
+        <!-- Mode Switcher -->
+        <nav
+          class="flex items-center gap-1 sm:gap-2 bg-slate-900/80 p-1 rounded-xl border border-slate-700 text-xs sm:text-sm"
+        >
+          <button
+            onclick="switchView('landing')"
+            id="tab-landing"
+            class="px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-2 bg-indigo-600 text-white shadow"
+          >
+            <i class="fa-solid fa-house text-indigo-300"></i> Conheça o
+            DocentePro
+          </button>
+          <button
+            onclick="switchView('bio')"
+            id="tab-bio"
+            class="px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-slate-400 hover:text-white"
+          >
+            <i class="fa-brands fa-tiktok text-cyan-300"></i> Link da Bio
+          </button>
+          <button
+            onclick="switchView('professor')"
+            id="tab-professor"
+            class="px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-slate-400 hover:text-white"
+          >
+            <i class="fa-solid fa-chalkboard-user"></i> Painel do Professor
+          </button>
+          <button
+            onclick="switchView('aluno')"
+            id="tab-aluno"
+            class="px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-slate-400 hover:text-white"
+          >
+            <i class="fa-solid fa-user-graduate"></i> Área do Aluno
+          </button>
+        </nav>
+
+        <div class="hidden md:flex items-center gap-2 text-xs text-slate-400">
+          <span
+            class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+          ></span>
+          API Online em Nuvem
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+      <!-- ============================================================== -->
+      <!-- VIEW 0: LANDING PAGE & PASSO A PASSO INTERATIVO                -->
+      <!-- ============================================================== -->
+      <section id="view-landing" class="block animate-fadeIn space-y-16">
+        <!-- HERO -->
+        <div class="text-center py-6 sm:py-10 relative">
+          <div
+            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-indigo-500/30 text-xs font-bold text-indigo-300 shadow-xl mb-5"
+          >
+            <span
+              class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+            ></span>
+            <span>7 Dias Grátis para Conhecer e Usar</span>
+            <span class="text-slate-600">|</span>
+            <span class="text-emerald-400 font-extrabold"
+              >100% no seu PIX • Sem Taxas de Plataformas</span
+            >
+          </div>
+
+          <h1
+            class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white max-w-4xl mx-auto leading-tight"
+          >
+            Transforme Seguidores das Redes em
+            <span
+              class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent"
+              >Alunos Pagantes</span
+            >
+          </h1>
+
+          <p
+            class="mt-4 text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed"
+          >
+            Ecossistema completo para professores de
+            <b>Inglês, Espanhol, Redação ENEM, Matemática e Reforço</b> com
+            audiência no <b>TikTok, Instagram e Twitter/X</b>. Link da Bio com
+            triagem automática, cobrança direta no seu PIX e portal do aluno com
+            correção de áudios e tarefas.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div
+            class="mt-7 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
+          >
+            <button
+              onclick="switchView('professor')"
+              class="px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-extrabold text-sm rounded-xl shadow-lg shadow-emerald-500/25 transition flex items-center gap-2"
+            >
+              <i class="fa-solid fa-gift"></i>
+              <span>Começar 7 Dias Grátis</span>
+            </button>
+            <a
+              href="#landing-passo-a-passo"
+              class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-sm rounded-xl shadow-lg shadow-indigo-600/25 transition flex items-center gap-2"
+            >
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>Ver Passo a Passo Interativo</span>
+            </a>
+            <button
+              onclick="switchView('bio')"
+              class="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-bold text-sm rounded-xl border border-slate-700 transition flex items-center gap-2"
+            >
+              <i class="fa-brands fa-tiktok text-cyan-400"></i>
+              <span>Ver Link da Bio no Celular</span>
+            </button>
+          </div>
+
+          <!-- Social Badges -->
+          <div
+            class="mt-8 flex flex-wrap items-center justify-center gap-5 text-xs text-slate-400"
+          >
+            <span
+              class="text-slate-500 font-bold uppercase tracking-wider text-[11px]"
+              >Compatível com:</span
+            >
+            <span class="flex items-center gap-1.5 text-slate-300 font-semibold"
+              ><i class="fa-brands fa-tiktok text-cyan-400"></i> TikTok</span
+            >
+            <span class="flex items-center gap-1.5 text-slate-300 font-semibold"
+              ><i class="fa-brands fa-x-twitter text-white"></i> Twitter
+              (X)</span
+            >
+            <span class="flex items-center gap-1.5 text-slate-300 font-semibold"
+              ><i class="fa-brands fa-instagram text-pink-400"></i>
+              Instagram</span
+            >
+            <span class="flex items-center gap-1.5 text-slate-300 font-semibold"
+              ><i class="fa-brands fa-whatsapp text-emerald-400"></i>
+              WhatsApp</span
+            >
+            <span
+              class="flex items-center gap-1.5 text-emerald-400 font-semibold"
+              ><i class="fa-solid fa-qrcode"></i> PIX Direto Oficial</span
+            >
+          </div>
+        </div>
+
+        <!-- PASSO A PASSO INTERATIVO DA LANDING PAGE -->
+        <div
+          id="landing-passo-a-passo"
+          class="bg-slate-900/90 rounded-3xl border border-slate-800 p-6 sm:p-10 shadow-2xl"
+        >
+          <div class="text-center max-w-2xl mx-auto mb-8">
+            <div
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-bold uppercase tracking-wider mb-2"
+            >
+              <i class="fa-solid fa-route"></i> Passo a Passo Descomplicado
+            </div>
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-white">
+              Como Funciona em 4 Passos Simples
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400 mt-2">
+              Clique nas 4 etapas abaixo para ver como é fácil colocar suas
+              aulas para rodar.
+            </p>
+          </div>
+
+          <!-- Interactive Steps Tab Buttons -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-8">
+            <button
+              onclick="selectLandingStep(1)"
+              id="lstep-btn-1"
+              class="p-3.5 rounded-xl border text-left transition bg-indigo-600/20 border-indigo-500 text-white shadow"
+            >
+              <div class="flex items-center justify-between mb-1">
+                <span
+                  class="w-6 h-6 rounded-full bg-indigo-600 text-white font-extrabold text-xs flex items-center justify-center"
+                  >1</span
+                >
+                <i class="fa-solid fa-qrcode text-emerald-400"></i>
+              </div>
+              <div class="font-bold text-xs sm:text-sm">Perfil & PIX</div>
+              <div class="text-[10px] text-slate-400">Configure suas redes</div>
+            </button>
+
+            <button
+              onclick="selectLandingStep(2)"
+              id="lstep-btn-2"
+              class="p-3.5 rounded-xl border text-left transition bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
+            >
+              <div class="flex items-center justify-between mb-1">
+                <span
+                  class="w-6 h-6 rounded-full bg-slate-800 text-slate-300 font-extrabold text-xs flex items-center justify-center"
+                  >2</span
+                >
+                <i class="fa-solid fa-sliders text-indigo-400"></i>
+              </div>
+              <div class="font-bold text-xs sm:text-sm">Matérias & Preços</div>
+              <div class="text-[10px] text-slate-400">Planos flexíveis</div>
+            </button>
+
+            <button
+              onclick="selectLandingStep(3)"
+              id="lstep-btn-3"
+              class="p-3.5 rounded-xl border text-left transition bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
+            >
+              <div class="flex items-center justify-between mb-1">
+                <span
+                  class="w-6 h-6 rounded-full bg-slate-800 text-slate-300 font-extrabold text-xs flex items-center justify-center"
+                  >3</span
+                >
+                <i class="fa-brands fa-tiktok text-cyan-400"></i>
+              </div>
+              <div class="font-bold text-xs sm:text-sm">Link da Bio</div>
+              <div class="text-[10px] text-slate-400">
+                Divulgue e trie leads
+              </div>
+            </button>
+
+            <button
+              onclick="selectLandingStep(4)"
+              id="lstep-btn-4"
+              class="p-3.5 rounded-xl border text-left transition bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
+            >
+              <div class="flex items-center justify-between mb-1">
+                <span
+                  class="w-6 h-6 rounded-full bg-slate-800 text-slate-300 font-extrabold text-xs flex items-center justify-center"
+                  >4</span
+                >
+                <i class="fa-solid fa-headphones text-purple-400"></i>
+              </div>
+              <div class="font-bold text-xs sm:text-sm">Alunos & Tarefas</div>
+              <div class="text-[10px] text-slate-400">Áudios e redações</div>
+            </button>
+          </div>
+
+          <!-- Interactive Steps Display Box -->
+          <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800">
+            <!-- L-STEP 1 -->
+            <div id="lstep-box-1" class="block animate-fadeIn">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                <div>
+                  <span
+                    class="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20"
+                    >Etapa 1 de 4</span
+                  >
+                  <h3 class="text-xl sm:text-2xl font-black text-white mt-2">
+                    Coloque suas Redes e sua Chave PIX Pessoal
+                  </h3>
+                  <p
+                    class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed"
+                  >
+                    No painel, cadastre seu <b>Twitter/X</b>, <b>TikTok</b>,
+                    <b>Instagram</b>, <b>WhatsApp</b> e a chave PIX onde você
+                    deseja receber o pagamento dos seus alunos. Todo valor pago
+                    pelos seus alunos particulares vai
+                    <b>100% direto para o seu banco</b> sem passar pelo
+                    DocentePro!
+                  </p>
+                  <div class="mt-4">
+                    <button
+                      onclick="switchView('professor')"
+                      class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-lg transition flex items-center gap-1.5 shadow"
+                    >
+                      <i class="fa-solid fa-sliders"></i> Abrir Painel do
+                      Professor
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-2 text-xs"
+                >
+                  <div class="text-slate-400 text-[11px] font-bold uppercase">
+                    Exemplo de Configuração:
+                  </div>
+                  <div
+                    class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 flex items-center gap-2"
+                  >
+                    <i class="fa-brands fa-x-twitter text-white"></i>
+                    <span>Twitter: @professorexemplo</span>
+                  </div>
+                  <div
+                    class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 flex items-center gap-2"
+                  >
+                    <i class="fa-brands fa-tiktok text-cyan-400"></i>
+                    <span>TikTok: @professorexemplo</span>
+                  </div>
+                  <div
+                    class="bg-slate-950 p-2.5 rounded-lg border border-emerald-500/40 flex items-center gap-2 text-emerald-400 font-bold"
+                  >
+                    <i class="fa-solid fa-key"></i>
+                    <span>PIX: professor.pix@gmail.com</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- L-STEP 2 -->
+            <div id="lstep-box-2" class="hidden animate-fadeIn">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                <div>
+                  <span
+                    class="text-[11px] font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full border border-indigo-500/20"
+                    >Etapa 2 de 4</span
+                  >
+                  <h3 class="text-xl sm:text-2xl font-black text-white mt-2">
+                    Crie Matérias e Ajuste Preços Quando Quiser
+                  </h3>
+                  <p
+                    class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed"
+                  >
+                    Cadastre aulas de conversação, redação ENEM, pacotes mensais
+                    ou aulas avulsas. Você tem total controle dos seus preços e
+                    pode pausar ou reativar matérias a qualquer momento.
+                  </p>
+                  <div class="mt-4">
+                    <button
+                      onclick="switchView('professor')"
+                      class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-lg transition flex items-center gap-1.5 shadow"
+                    >
+                      <i class="fa-solid fa-plus"></i> Ver Gerenciador de Planos
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-2 text-xs"
+                >
+                  <div class="text-slate-400 text-[11px] font-bold uppercase">
+                    Planos Flexíveis:
+                  </div>
+                  <div
+                    class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex justify-between items-center"
+                  >
+                    <div>
+                      <b>Inglês Conversação</b>
+                      <div class="text-[10px] text-indigo-400">
+                        2x na semana
+                      </div>
+                    </div>
+                    <span class="text-emerald-400 font-black"
+                      >R$ 350,00/mês</span
+                    >
+                  </div>
+                  <div
+                    class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex justify-between items-center"
+                  >
+                    <div>
+                      <b>Redação ENEM Nota 1000</b>
+                      <div class="text-[10px] text-pink-400">
+                        PDFs e correções
+                      </div>
+                    </div>
+                    <span class="text-emerald-400 font-black"
+                      >R$ 280,00/mês</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- L-STEP 3 -->
+            <div id="lstep-box-3" class="hidden animate-fadeIn">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                <div>
+                  <span
+                    class="text-[11px] font-bold text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-full border border-cyan-500/20"
+                    >Etapa 3 de 4</span
+                  >
+                  <h3 class="text-xl sm:text-2xl font-black text-white mt-2">
+                    Publique o Link da Bio nas suas Redes
+                  </h3>
+                  <p
+                    class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed"
+                  >
+                    Coloque o link no seu perfil do TikTok, Twitter/X e
+                    Instagram. Quando o seguidor clica, ele vê seus planos,
+                    preenche a triagem (nível e horário) e paga via PIX direto
+                    para você.
+                  </p>
+                  <div class="mt-4">
+                    <button
+                      onclick="switchView('bio')"
+                      class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs rounded-lg transition flex items-center gap-1.5 shadow"
+                    >
+                      <i class="fa-solid fa-mobile-screen"></i> Testar Link da
+                      Bio Agora
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-center"
+                >
+                  <div class="text-[11px] text-slate-400 mb-2">
+                    Simulação do Link no Celular:
+                  </div>
+                  <div
+                    class="p-3 bg-slate-950 rounded-xl border border-indigo-500/30 text-left text-xs"
+                  >
+                    <div class="font-bold text-white mb-1">
+                      👨‍🏫 Teacher Lucas (Inglês)
+                    </div>
+                    <div class="text-[10px] text-slate-400 mb-2">
+                      Seguidor: "Gostei dos seus vídeos no TikTok!"
+                    </div>
+                    <div class="text-[11px] text-emerald-400 font-bold">
+                      PIX Copia-e-Cola e QR Code gerados na hora!
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- L-STEP 4 -->
+            <div id="lstep-box-4" class="hidden animate-fadeIn">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                <div>
+                  <span
+                    class="text-[11px] font-bold text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-full border border-purple-500/20"
+                    >Etapa 4 de 4</span
+                  >
+                  <h3 class="text-xl sm:text-2xl font-black text-white mt-2">
+                    Atenda Alunos e Corrija Tarefas com Áudio e PDF
+                  </h3>
+                  <p
+                    class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed"
+                  >
+                    Os alunos matriculados recebem acesso à Área do Aluno, onde
+                    podem gravar áudios de pronúncia diretamente pelo navegador
+                    e anexar PDFs de redações para você corrigir e dar notas.
+                  </p>
+                  <div class="mt-4">
+                    <button
+                      onclick="switchView('aluno')"
+                      class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-lg transition flex items-center gap-1.5 shadow"
+                    >
+                      <i class="fa-solid fa-user-graduate"></i> Ver Área do
+                      Aluno
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-2 text-xs"
+                >
+                  <div class="text-slate-400 text-[11px] font-bold uppercase">
+                    Portal Pedagógico Integrado:
+                  </div>
+                  <div
+                    class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-center justify-between"
+                  >
+                    <span>🎙️ Áudio de Pronúncia do Aluno</span>
+                    <span
+                      class="text-[10px] text-amber-400 bg-amber-500/20 px-2 py-0.5 rounded"
+                      >Aguardando Nota</span
+                    >
+                  </div>
+                  <div
+                    class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-center justify-between"
+                  >
+                    <span>📄 Redação Dissertativa em PDF</span>
+                    <span
+                      class="text-[10px] text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded"
+                      >Corrigido</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIMULADOR DE LUCRO E ECONOMIA -->
+        <div
+          class="bg-slate-900/90 rounded-3xl border border-slate-800 p-6 sm:p-10 shadow-2xl"
+        >
+          <div class="text-center max-w-2xl mx-auto mb-8">
+            <div
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-bold uppercase tracking-wider mb-2"
+            >
+              <i class="fa-solid fa-calculator"></i> Economia Real
+            </div>
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-white">
+              Simulador: Quanto você deixa de perder?
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400 mt-2">
+              Plataformas tradicionais cobram 8,99% + R$ 2,49 por venda. Veja
+              sua economia no DocentePro.
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto"
+          >
+            <div class="space-y-5">
+              <div>
+                <div
+                  class="flex justify-between text-xs font-bold text-slate-300 mb-1"
+                >
+                  <span>Número de Alunos Particulares:</span>
+                  <span
+                    id="lcalc-students-val"
+                    class="text-sm text-indigo-400 font-extrabold"
+                    >15 Alunos</span
+                  >
+                </div>
+                <input
+                  type="range"
+                  id="lcalc-students"
+                  min="3"
+                  max="50"
+                  value="15"
+                  step="1"
+                  oninput="updateLandingCalculator()"
+                  class="w-full accent-indigo-500 h-2 bg-slate-950 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              <div>
+                <div
+                  class="flex justify-between text-xs font-bold text-slate-300 mb-1"
+                >
+                  <span>Mensalidade Média por Aluno:</span>
+                  <span
+                    id="lcalc-fee-val"
+                    class="text-sm text-emerald-400 font-extrabold"
+                    >R$ 250,00</span
+                  >
+                </div>
+                <input
+                  type="range"
+                  id="lcalc-fee"
+                  min="80"
+                  max="600"
+                  value="250"
+                  step="10"
+                  oninput="updateLandingCalculator()"
+                  class="w-full accent-emerald-500 h-2 bg-slate-950 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              <div
+                class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 text-xs text-slate-400 space-y-1"
+              >
+                <div class="flex justify-between">
+                  <span>Faturamento Bruto:</span>
+                  <span id="lcalc-gross" class="font-bold text-white"
+                    >R$ 3.750,00</span
+                  >
+                </div>
+                <div class="flex justify-between text-red-400">
+                  <span>Taxas perdidas em outras plataformas:</span>
+                  <span id="lcalc-loss" class="font-bold">- R$ 374,48/mês</span>
+                </div>
+                <div class="flex justify-between text-indigo-300">
+                  <span>DocentePro (Fixo mensal):</span>
+                  <span class="font-bold">R$ 39,90/mês</span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-emerald-950/50 via-slate-950 to-indigo-950/50 p-6 rounded-2xl border border-emerald-500/40 text-center shadow-xl"
+            >
+              <span
+                class="text-xs uppercase font-extrabold text-emerald-400 tracking-wider"
+                >Economia Anual no seu Bolso</span
+              >
+              <div
+                id="lcalc-savings"
+                class="text-4xl font-black text-emerald-400 my-2"
+              >
+                R$ 4.014,96
+              </div>
+              <p class="text-xs text-slate-300 mb-5">
+                Dinheiro que fica 100% com você, caindo diretamente na sua chave
+                PIX a cada aula.
+              </p>
+              <button
+                onclick="switchView('professor')"
+                class="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-extrabold text-xs rounded-xl shadow-lg transition flex items-center justify-center gap-2"
+              >
+                <i class="fa-solid fa-gift"></i> Quero Meus 7 Dias Grátis
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PREÇO CLARO E TRANSPARENTE: R$ 39,90 -->
+        <div
+          class="max-w-lg mx-auto bg-slate-900 rounded-3xl border-2 border-emerald-500 shadow-2xl p-6 sm:p-8 relative overflow-hidden"
+        >
+          <div
+            class="absolute top-0 right-0 bg-emerald-500 text-slate-950 font-black text-[10px] uppercase tracking-wider px-3 py-1 rounded-bl-xl shadow"
+          >
+            7 Dias Grátis
+          </div>
+          <div
+            class="text-xs font-bold text-indigo-400 uppercase tracking-wider"
+          >
+            Plano Único e Completo
+          </div>
+          <h3 class="text-2xl font-black text-white mt-1">
+            DocentePro Ilimitado
+          </h3>
+
+          <div
+            class="my-4 pb-4 border-b border-slate-800 flex items-baseline gap-2"
+          >
+            <span class="text-4xl font-black text-white">R$ 39,90</span>
+            <span class="text-slate-400 text-xs font-semibold"
+              >/mês após 7 dias</span
+            >
+          </div>
+
+          <ul class="space-y-2.5 text-xs text-slate-300 mb-6">
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-check text-emerald-400"></i>
+              <b>7 Dias Grátis</b> para conhecer e faturar
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-check text-emerald-400"></i>
+              <b>Zero comissão</b> por aluno (100% no seu PIX)
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-check text-emerald-400"></i> Alunos,
+              matérias e preços ilimitados
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-check text-emerald-400"></i> Link da Bio com
+              triagem automática
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-check text-emerald-400"></i> Portal com
+              gravação de áudio e PDFs
+            </li>
+          </ul>
+
+          <button
+            onclick="switchView('professor')"
+            class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-extrabold text-sm rounded-xl shadow-lg transition flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-bolt"></i> Testar 7 Dias Grátis Agora
+          </button>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- VIEW 1: LINK DA BIO NO TIKTOK (Simulador Mobile de Alta Conversão) -->
+      <!-- ============================================================== -->
+      <section id="view-bio" class="hidden animate-fadeIn">
+        <div
+          class="max-w-md mx-auto bg-slate-800/90 rounded-3xl border border-slate-700 shadow-2xl overflow-hidden p-6 relative"
+        >
+          <!-- Teacher Selector for Demo -->
+          <div
+            class="mb-4 bg-slate-900/90 p-2.5 rounded-xl border border-slate-700/60 text-xs flex items-center justify-between"
+          >
+            <span class="text-slate-400">Ver como seguidor de:</span>
+            <select
+              id="bio-teacher-select"
+              onchange="loadBioView(this.value)"
+              class="bg-slate-800 text-white rounded px-2 py-1 border border-slate-600 focus:outline-none"
+            >
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <!-- Teacher Header -->
+          <div class="text-center relative pb-6 border-b border-slate-700/80">
+            <div class="relative inline-block mb-3">
+              <div
+                class="w-24 h-24 rounded-full p-1 bg-gradient-to-tr from-cyan-400 via-indigo-500 to-pink-500 shadow-lg"
+              >
+                <div
+                  id="bio-avatar"
+                  class="w-full h-full rounded-full bg-slate-700 flex items-center justify-center text-3xl font-bold text-white overflow-hidden"
+                >
+                  👨‍🏫
+                </div>
+              </div>
+              <div
+                class="absolute bottom-1 right-1 bg-black text-cyan-400 rounded-full px-2 py-0.5 text-[10px] font-bold border border-slate-700 flex items-center gap-1 shadow"
+              >
+                <i class="fa-brands fa-tiktok"></i>
+                <span id="bio-tiktok">@teacher</span>
+              </div>
+            </div>
+            <h1 id="bio-name" class="text-2xl font-black text-white">
+              Teacher Lucas
+            </h1>
+            <p id="bio-headline" class="text-sm text-cyan-400 font-medium mt-1">
+              Inglês Real para Destravar no TikTok e na Vida
+            </p>
+            <p
+              id="bio-desc"
+              class="text-xs text-slate-400 mt-2 max-w-xs mx-auto leading-relaxed"
+            ></p>
+
+            <!-- Redes Sociais do Professor (Twitter / X, TikTok, Instagram, WhatsApp) -->
+            <div
+              class="flex flex-wrap items-center justify-center gap-2 mt-3.5"
+              id="bio-social-bar"
+            >
+              <a
+                id="bio-social-tiktok"
+                href="#"
+                target="_blank"
+                class="px-2.5 py-1 bg-black/80 hover:bg-black text-cyan-400 border border-slate-700 rounded-lg text-[11px] font-bold transition flex items-center gap-1.5 shadow"
+              >
+                <i class="fa-brands fa-tiktok"></i>
+                <span id="bio-tiktok-text">TikTok</span>
+              </a>
+              <a
+                id="bio-social-twitter"
+                href="#"
+                target="_blank"
+                class="px-2.5 py-1 bg-slate-900 hover:bg-black text-slate-200 border border-slate-700 rounded-lg text-[11px] font-bold transition flex items-center gap-1.5 shadow"
+              >
+                <i class="fa-brands fa-x-twitter text-cyan-300"></i>
+                <span id="bio-twitter-text">Twitter (X)</span>
+              </a>
+              <a
+                id="bio-social-instagram"
+                href="#"
+                target="_blank"
+                class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-pink-400 border border-slate-700 rounded-lg text-[11px] font-bold transition flex items-center gap-1.5 shadow"
+              >
+                <i class="fa-brands fa-instagram"></i>
+                <span id="bio-insta-text">Instagram</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Plans & Subjects Available -->
+          <div class="mt-6">
+            <div class="flex items-center justify-between mb-3">
+              <h2
+                class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2"
+              >
+                <i class="fa-solid fa-layer-group text-indigo-400"></i> Planos &
+                Matérias Disponíveis
+              </h2>
+              <span
+                class="text-[11px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30"
+                >Vagas Limitadas</span
+              >
+            </div>
+
+            <div id="bio-plans-list" class="space-y-3">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+
+          <!-- Triage / Schedule Interactive Box -->
+          <div
+            class="mt-6 bg-gradient-to-br from-indigo-950/60 to-slate-900 p-5 rounded-2xl border border-indigo-500/30 shadow-lg"
+          >
+            <div
+              class="flex items-center gap-2 text-indigo-300 font-bold text-sm mb-3"
+            >
+              <i class="fa-solid fa-bolt text-yellow-400"></i> Agendar Aula /
+              Diagnóstico Rápido
+            </div>
+            <form
+              id="triage-form"
+              onsubmit="submitTriage(event)"
+              class="space-y-3"
+            >
+              <div>
+                <label class="block text-[11px] text-slate-300 font-medium mb-1"
+                  >Seu Nome Completo:</label
+                >
+                <input
+                  type="text"
+                  id="triage-name"
+                  required
+                  placeholder="Ex: Lucas Mendonça"
+                  class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label class="block text-[11px] text-slate-300 font-medium mb-1"
+                  >Seu WhatsApp (com DDD):</label
+                >
+                <input
+                  type="tel"
+                  id="triage-whatsapp"
+                  required
+                  placeholder="(11) 98765-4321"
+                  class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                />
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label
+                    class="block text-[11px] text-slate-300 font-medium mb-1"
+                    >Nível Atual:</label
+                  >
+                  <select
+                    id="triage-level"
+                    class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white focus:outline-none"
+                  >
+                    <option>Iniciante do Zero</option>
+                    <option>Travo na hora de falar</option>
+                    <option>Intermediário</option>
+                    <option>Avançado / Fluência</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-[11px] text-slate-300 font-medium mb-1"
+                    >Horário de Preferência:</label
+                  >
+                  <select
+                    id="triage-time"
+                    class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white focus:outline-none"
+                  >
+                    <option>Noite (18h às 22h)</option>
+                    <option>Manhã (08h às 12h)</option>
+                    <option>Tarde (13h às 18h)</option>
+                    <option>Sábados</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[11px] text-slate-300 font-medium mb-1"
+                  >Selecione o Plano de Interesse:</label
+                >
+                <select
+                  id="triage-plan"
+                  class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white focus:outline-none"
+                >
+                  <!-- Populated via JS -->
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full mt-2 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 transition text-sm"
+              >
+                <i class="fa-brands fa-whatsapp text-lg"></i> Confirmar & Gerar
+                PIX da Aula
+              </button>
+            </form>
+          </div>
+
+          <!-- PIX Modal / Receipt area (Dynamic) -->
+          <div
+            id="bio-pix-modal"
+            class="hidden mt-6 bg-slate-950 p-5 rounded-2xl border border-emerald-500/40 text-center animate-fadeIn"
+          >
+            <div
+              class="w-12 h-12 mx-auto rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-2"
+            >
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-base font-bold text-white">
+              Agendamento Realizado!
+            </h3>
+            <p class="text-xs text-slate-300 mt-1">
+              Efetue o PIX para garantir o horário exclusivo na agenda.
+            </p>
+
+            <div class="my-4 p-3 bg-white rounded-xl inline-block shadow">
+              <img
+                id="bio-pix-qrcode"
+                src=""
+                alt="QR Code PIX"
+                class="w-44 h-44 mx-auto"
+              />
+            </div>
+
+            <div class="text-xs text-slate-400 mb-2">
+              Valor:
+              <span id="bio-pix-val" class="font-bold text-emerald-400 text-sm"
+                >R$ 0,00</span
+              >
+            </div>
+
+            <div
+              class="bg-slate-900 p-2.5 rounded-lg border border-slate-800 text-left text-[11px] font-mono break-all text-slate-300 mb-3 select-all"
+              id="bio-pix-copy"
+            >
+              <!-- PIX code -->
+            </div>
+
+            <button
+              onclick="copyPixCode('bio-pix-copy')"
+              class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-semibold text-xs transition flex items-center justify-center gap-2"
+            >
+              <i class="fa-solid fa-copy"></i> Copiar Código PIX Copia-e-Cola
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- VIEW 2: PAINEL DO PROFESSOR (Administração de Planos e Alunos)  -->
+      <!-- ============================================================== -->
+      <section id="view-professor" class="hidden animate-fadeIn space-y-6">
+        <!-- Teacher Header & Selector -->
+        <div
+          class="bg-slate-800/90 p-5 rounded-2xl border border-slate-700 flex flex-wrap items-center justify-between gap-4"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-14 h-14 rounded-2xl bg-indigo-600 flex items-center justify-center text-2xl font-bold shadow-md"
+            >
+              👨‍🏫
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h1 id="prof-dash-name" class="text-xl font-bold text-white">
+                  Teacher Lucas
+                </h1>
+                <span
+                  id="prof-dash-badge"
+                  class="px-2 py-0.5 rounded text-[11px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30"
+                  >Plano Pro</span
+                >
+              </div>
+              <p id="prof-dash-headline" class="text-xs text-slate-400">
+                Inglês Real para Destravar no TikTok e na Vida
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <label class="text-xs text-slate-400">Trocar Professor:</label>
+            <select
+              id="prof-select"
+              onchange="loadProfessorView(this.value)"
+              class="bg-slate-900 text-white text-xs rounded-lg px-3 py-2 border border-slate-700 focus:outline-none"
+            >
+              <!-- Populated via JS -->
+            </select>
+            <a
+              id="prof-link-bio-btn"
+              href="#"
+              onclick="
+                switchView('bio');
+                return false;
+              "
+              class="text-xs bg-slate-700 hover:bg-slate-600 px-3 py-2 rounded-lg font-semibold flex items-center gap-1.5 transition"
+            >
+              <i class="fa-brands fa-tiktok text-cyan-300"></i> Ver Minha Bio
+            </a>
+            <button
+              onclick="openTeacherPixModal()"
+              class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-lg font-semibold flex items-center gap-1.5 transition shadow"
+            >
+              <i class="fa-solid fa-qrcode text-emerald-400"></i> Minha Chave
+              PIX
+            </button>
+          </div>
+        </div>
+
+        <!-- 7-DAY TRIAL STATUS BANNER (Aviso de 7 Dias Grátis) -->
+        <div
+          id="prof-trial-banner"
+          class="p-4 rounded-2xl border flex flex-wrap items-center justify-between gap-3 animate-fadeIn transition"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              id="prof-trial-icon"
+              class="w-10 h-10 rounded-xl flex items-center justify-center text-xl font-bold bg-amber-500/20 text-amber-400"
+            >
+              🎁
+            </div>
+            <div>
+              <div id="prof-trial-title" class="text-sm font-bold text-white">
+                7 Dias Grátis para Conhecer e Usar
+              </div>
+              <div id="prof-trial-sub" class="text-xs text-slate-300">
+                Aproveite todos os recursos liberados sem pagar nada. Depois
+                apenas R$ 39,90/mês.
+              </div>
+            </div>
+          </div>
+          <button
+            id="prof-trial-btn"
+            onclick="openSubscribeModal()"
+            class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center gap-2"
+          >
+            <i class="fa-solid fa-qrcode text-sm"></i>
+            <span id="prof-trial-btn-text"
+              >Ativar Assinatura (R$ 39,90 via PIX)</span
+            >
+          </button>
+        </div>
+
+        <!-- ASSISTENTE INTERATIVO DE 4 ETAPAS (PASSO A PASSO DO PROFESSOR) -->
+        <div
+          class="bg-gradient-to-br from-indigo-950/70 via-slate-900 to-slate-900 rounded-2xl border border-indigo-500/40 p-5 shadow-xl"
+        >
+          <div
+            class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-700/80"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-xl bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-lg"
+              >
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </div>
+              <div>
+                <h2
+                  class="text-base font-extrabold text-white flex items-center gap-2"
+                >
+                  Assistente Passo a Passo do Professor
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30"
+                    >Guia Rápido</span
+                  >
+                </h2>
+                <p class="text-xs text-slate-400">
+                  Siga as 4 etapas abaixo para colocar suas aulas particulares
+                  no ar e faturar no PIX com facilidade.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-semibold">
+              <button
+                onclick="toggleWizardDetails()"
+                id="btn-toggle-wizard"
+                class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-chevron-up" id="wizard-chevron"></i>
+                <span id="wizard-toggle-text">Recolher</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="wizard-cards-grid"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          >
+            <!-- Etapa 1 -->
+            <div
+              class="bg-slate-900/90 p-4 rounded-xl border border-slate-700 hover:border-indigo-500/50 transition flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span
+                    class="w-6 h-6 rounded-full bg-indigo-600 text-white font-extrabold text-xs flex items-center justify-center"
+                    >1</span
+                  >
+                  <span
+                    id="wizard-step1-status"
+                    class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold"
+                    >Configurado ✅</span
+                  >
+                </div>
+                <h3 class="font-bold text-sm text-white mb-1">
+                  Perfil, Redes & PIX
+                </h3>
+                <p class="text-[11px] text-slate-400 mb-3">
+                  Coloque seu Twitter/X, TikTok, Instagram e sua chave PIX para
+                  receber 100% dos pagamentos dos alunos.
+                </p>
+              </div>
+              <button
+                onclick="openTeacherPixModal()"
+                class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-300 hover:text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 border border-indigo-500/30"
+              >
+                <i class="fa-solid fa-gear"></i> Configurar Perfil & PIX
+              </button>
+            </div>
+
+            <!-- Etapa 2 -->
+            <div
+              class="bg-slate-900/90 p-4 rounded-xl border border-slate-700 hover:border-indigo-500/50 transition flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span
+                    class="w-6 h-6 rounded-full bg-indigo-600 text-white font-extrabold text-xs flex items-center justify-center"
+                    >2</span
+                  >
+                  <span
+                    id="wizard-step2-status"
+                    class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold"
+                    >Ativo ✅</span
+                  >
+                </div>
+                <h3 class="font-bold text-sm text-white mb-1">
+                  Matérias & Preços
+                </h3>
+                <p class="text-[11px] text-slate-400 mb-3">
+                  Cadastre aulas de Inglês, Redação, Espanhol ou Exatas.
+                  Adicione ou altere preços quando desejar.
+                </p>
+              </div>
+              <button
+                onclick="scrollToPlansSection()"
+                class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-300 hover:text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 border border-indigo-500/30"
+              >
+                <i class="fa-solid fa-sliders"></i> Ajustar Matérias & Planos
+              </button>
+            </div>
+
+            <!-- Etapa 3 -->
+            <div
+              class="bg-slate-900/90 p-4 rounded-xl border border-slate-700 hover:border-indigo-500/50 transition flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span
+                    class="w-6 h-6 rounded-full bg-indigo-600 text-white font-extrabold text-xs flex items-center justify-center"
+                    >3</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 font-bold"
+                    >Divulgação</span
+                  >
+                </div>
+                <h3 class="font-bold text-sm text-white mb-1">
+                  Link da Bio nas Redes
+                </h3>
+                <p class="text-[11px] text-slate-400 mb-3">
+                  Copie seu link ou compartilhe diretamente com seus seguidores
+                  do TikTok, Twitter/X e WhatsApp.
+                </p>
+              </div>
+              <div class="grid grid-cols-2 gap-1.5">
+                <button
+                  onclick="copyTeacherBioLink()"
+                  class="py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-[11px] font-bold transition flex items-center justify-center gap-1"
+                >
+                  <i class="fa-solid fa-copy text-indigo-400"></i> Copiar Link
+                </button>
+                <button
+                  onclick="shareOnTwitter()"
+                  class="py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-[11px] font-bold transition flex items-center justify-center gap-1"
+                >
+                  <i class="fa-brands fa-x-twitter text-cyan-300"></i> Postar no
+                  X
+                </button>
+              </div>
+            </div>
+
+            <!-- Etapa 4 -->
+            <div
+              class="bg-slate-900/90 p-4 rounded-xl border border-slate-700 hover:border-indigo-500/50 transition flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span
+                    class="w-6 h-6 rounded-full bg-indigo-600 text-white font-extrabold text-xs flex items-center justify-center"
+                    >4</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-400 font-bold"
+                    >Pronto</span
+                  >
+                </div>
+                <h3 class="font-bold text-sm text-white mb-1">
+                  Alunos & Tarefas
+                </h3>
+                <p class="text-[11px] text-slate-400 mb-3">
+                  Receba triagens no WhatsApp, confira pagamentos no seu PIX e
+                  corrija áudios e redações no portal.
+                </p>
+              </div>
+              <button
+                onclick="switchView('bio')"
+                class="w-full py-2 bg-purple-600/30 hover:bg-purple-600 text-purple-300 hover:text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 border border-purple-500/30"
+              >
+                <i class="fa-solid fa-mobile-screen"></i> Ver Como Aluno Enxerga
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div
+            class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80"
+          >
+            <div
+              class="flex items-center justify-between text-slate-400 text-xs mb-2"
+            >
+              <span>Alunos Ativos</span>
+              <i class="fa-solid fa-users text-indigo-400"></i>
+            </div>
+            <div id="kpi-total-alunos" class="text-2xl font-black text-white">
+              0
+            </div>
+            <div
+              class="text-[11px] text-emerald-400 mt-1 flex items-center gap-1"
+            >
+              <i class="fa-solid fa-arrow-trend-up"></i> Agenda 85% preenchida
+            </div>
+          </div>
+
+          <div
+            class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80"
+          >
+            <div
+              class="flex items-center justify-between text-slate-400 text-xs mb-2"
+            >
+              <span>Faturamento Mensal Previsto</span>
+              <i class="fa-solid fa-brazilian-real-sign text-emerald-400"></i>
+            </div>
+            <div
+              id="kpi-faturamento"
+              class="text-2xl font-black text-emerald-400"
+            >
+              R$ 0,00
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">
+              Aulas particulares e pacotes
+            </div>
+          </div>
+
+          <div
+            class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80"
+          >
+            <div
+              class="flex items-center justify-between text-slate-400 text-xs mb-2"
+            >
+              <span>Status PIX dos Alunos</span>
+              <i class="fa-solid fa-qrcode text-cyan-400"></i>
+            </div>
+            <div class="flex items-center gap-3">
+              <span id="kpi-pagos" class="text-lg font-bold text-emerald-400"
+                >0 Pagos</span
+              >
+              <span class="text-slate-600">|</span>
+              <span id="kpi-pendentes" class="text-lg font-bold text-amber-400"
+                >0 Pendentes</span
+              >
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1">
+              Cobrança automática ativa
+            </div>
+          </div>
+
+          <div
+            class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80"
+          >
+            <div
+              class="flex items-center justify-between text-slate-400 text-xs mb-2"
+            >
+              <span>Leads do TikTok</span>
+              <i class="fa-brands fa-tiktok text-pink-400"></i>
+            </div>
+            <div id="kpi-leads" class="text-2xl font-black text-white">0</div>
+            <div class="text-[11px] text-cyan-400 mt-1">
+              Triagens filtradas no link da bio
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION: GERENCIADOR DE PLANOS E MATÉRIAS (Customizável pelo Professor!) -->
+        <div
+          class="bg-slate-800/90 rounded-2xl border border-slate-700 overflow-hidden shadow-xl"
+        >
+          <div
+            class="p-5 border-b border-slate-700 flex flex-wrap items-center justify-between gap-3"
+          >
+            <div>
+              <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-indigo-400"></i> Meus Planos,
+                Preços e Matérias
+              </h2>
+              <p class="text-xs text-slate-400">
+                Cadastre e ajuste o que aparece no seu link da bio do TikTok.
+                Altere preços a qualquer momento.
+              </p>
+            </div>
+            <button
+              onclick="openNewPlanModal()"
+              class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl transition flex items-center gap-2 shadow-lg shadow-indigo-600/30"
+            >
+              <i class="fa-solid fa-plus"></i> Novo Plano / Matéria
+            </button>
+          </div>
+
+          <div class="p-5">
+            <div
+              id="prof-plans-grid"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
+              <!-- Plan Cards Loaded via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION: GESTÃO DE ALUNOS PARTICULARES E COBRANÇA PIX -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Table: Alunos e Pagamentos -->
+          <div
+            class="lg:col-span-2 bg-slate-800/90 rounded-2xl border border-slate-700 overflow-hidden shadow-xl"
+          >
+            <div
+              class="p-5 border-b border-slate-700 flex items-center justify-between"
+            >
+              <h2
+                class="text-base font-bold text-white flex items-center gap-2"
+              >
+                <i class="fa-solid fa-address-book text-emerald-400"></i> Alunos
+                Matriculados & Mensalidades
+              </h2>
+              <button
+                onclick="openNewStudentModal()"
+                class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1"
+              >
+                <i class="fa-solid fa-user-plus"></i> Matricular Aluno
+              </button>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead
+                  class="bg-slate-900/60 text-slate-400 font-semibold border-b border-slate-700"
+                >
+                  <tr>
+                    <th class="p-3">Aluno</th>
+                    <th class="p-3">Plano / Matéria</th>
+                    <th class="p-3">Mensalidade</th>
+                    <th class="p-3">Horário</th>
+                    <th class="p-3">Status PIX</th>
+                    <th class="p-3 text-right">Ação</th>
+                  </tr>
+                </thead>
+                <tbody
+                  id="prof-students-table"
+                  class="divide-y divide-slate-700/60"
+                >
+                  <!-- Loaded via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Fila de Correção de Lições (Áudios & PDFs) -->
+          <div
+            class="bg-slate-800/90 rounded-2xl border border-slate-700 overflow-hidden shadow-xl flex flex-col"
+          >
+            <div
+              class="p-5 border-b border-slate-700 flex items-center justify-between"
+            >
+              <h2
+                class="text-base font-bold text-white flex items-center gap-2"
+              >
+                <i class="fa-solid fa-headphones text-cyan-400"></i> Fila de
+                Tarefas
+              </h2>
+              <span
+                class="text-xs bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded-full"
+                id="tasks-badge"
+                >0 para corrigir</span
+              >
+            </div>
+
+            <div
+              class="p-4 space-y-3 flex-1 overflow-y-auto max-h-[380px]"
+              id="prof-tasks-list"
+            >
+              <!-- Loaded via JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- VIEW 3: ÁREA DO ALUNO (Gravação de Áudio, Aulas & Fatura PIX)   -->
+      <!-- ============================================================== -->
+      <section
+        id="view-aluno"
+        class="hidden animate-fadeIn max-w-2xl mx-auto space-y-6"
+      >
+        <!-- Student Profile Card -->
+        <div
+          class="bg-slate-800/90 p-5 rounded-2xl border border-slate-700 flex items-center justify-between gap-4"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-xl font-bold text-white"
+            >
+              🎓
+            </div>
+            <div>
+              <h1 class="text-lg font-bold text-white" id="aluno-name">
+                João Pedro Santos
+              </h1>
+              <p class="text-xs text-slate-400" id="aluno-sub">
+                Plano: Inglês para Viagem (Prof. Lucas)
+              </p>
+            </div>
+          </div>
+
+          <select
+            id="aluno-select"
+            onchange="loadAlunoView(this.value)"
+            class="bg-slate-900 text-white text-xs rounded-lg px-2.5 py-1.5 border border-slate-700"
+          >
+            <!-- Populated via JS -->
+          </select>
+        </div>
+
+        <!-- Próxima Aula Card -->
+        <div
+          class="bg-gradient-to-r from-indigo-900/40 via-slate-800 to-slate-800 p-5 rounded-2xl border border-indigo-500/30 flex flex-wrap items-center justify-between gap-4"
+        >
+          <div>
+            <span
+              class="text-[11px] font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5 mb-1"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+              ></span>
+              Próxima Aula Confirmada
+            </span>
+            <div class="text-lg font-black text-white" id="aluno-next-class">
+              Terça-feira às 19:00
+            </div>
+            <div class="text-xs text-slate-400" id="aluno-teacher-name">
+              Com Teacher Lucas
+            </div>
+          </div>
+
+          <a
+            id="aluno-meet-btn"
+            href="#"
+            target="_blank"
+            class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-indigo-600/30 transition flex items-center gap-2"
+          >
+            <i class="fa-solid fa-video"></i> Entrar na Sala Meet / Zoom
+          </a>
+        </div>
+
+        <!-- Fatura da Mensalidade com PIX Oficial -->
+        <div class="bg-slate-800/90 p-5 rounded-2xl border border-slate-700">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-sm font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-receipt text-emerald-400"></i> Mensalidade
+                das Aulas
+              </h2>
+              <p class="text-xs text-slate-400">
+                Pagamento direto ao seu professor via PIX
+              </p>
+            </div>
+            <span
+              id="aluno-status-badge"
+              class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+            >
+              Pago em Dia
+            </span>
+          </div>
+
+          <div
+            id="aluno-pix-box"
+            class="bg-slate-900/90 p-4 rounded-xl border border-slate-700/60 flex flex-wrap items-center gap-4"
+          >
+            <img
+              id="aluno-pix-qr"
+              src=""
+              alt="PIX QR"
+              class="w-28 h-28 bg-white p-1 rounded-lg"
+            />
+            <div class="flex-1 min-w-[200px]">
+              <div class="text-xs text-slate-400">Valor da Mensalidade:</div>
+              <div
+                class="text-xl font-black text-emerald-400"
+                id="aluno-pix-val"
+              >
+                R$ 380,00
+              </div>
+              <div class="text-[11px] text-slate-400 mt-1">
+                Vencimento:
+                <span id="aluno-pix-due" class="text-white font-medium"
+                  >25/11/2026</span
+                >
+              </div>
+              <button
+                onclick="copyPixCode('aluno-pix-payload')"
+                class="mt-3 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-xs font-semibold text-white transition flex items-center gap-2"
+              >
+                <i class="fa-solid fa-copy text-indigo-400"></i> Copiar Código
+                PIX Copia-e-Cola
+              </button>
+              <div id="aluno-pix-payload" class="hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarefa da Semana e Gravador de Áudio Web -->
+        <div
+          class="bg-slate-800/90 p-5 rounded-2xl border border-slate-700 space-y-4"
+        >
+          <div>
+            <h2 class="text-sm font-bold text-white flex items-center gap-2">
+              <i class="fa-solid fa-microphone-lines text-pink-400"></i> Lição
+              da Semana: Gravação de Áudio / Redação
+            </h2>
+            <p class="text-xs text-slate-400">
+              Pratique a fala ou envie sua redação para o professor avaliar
+              antes da próxima aula.
+            </p>
+          </div>
+
+          <div
+            class="bg-slate-900/90 p-4 rounded-xl border border-slate-700/60 space-y-3"
+          >
+            <div class="text-xs font-semibold text-indigo-300">
+              🎙️ Instrução do Professor: "Grave um áudio de até 2 minutos
+              explicando um plano para suas próximas férias usando o Simple
+              Future (Will / Going to)."
+            </div>
+
+            <!-- Web Audio Recorder Interactive Element -->
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <button
+                id="btn-record-audio"
+                onclick="toggleAudioRecording()"
+                class="px-4 py-2.5 bg-pink-600 hover:bg-pink-500 text-white text-xs font-bold rounded-xl transition flex items-center gap-2 shadow-lg shadow-pink-600/30"
+              >
+                <i class="fa-solid fa-circle text-xs" id="rec-icon"></i>
+                <span id="rec-text">Iniciar Gravação de Áudio</span>
+              </button>
+
+              <span
+                id="rec-timer"
+                class="text-xs font-mono text-slate-400 hidden"
+                >00:00</span
+              >
+
+              <button
+                onclick="submitAudioTaskDemo()"
+                class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-xl border border-slate-700 transition flex items-center gap-2"
+              >
+                <i class="fa-solid fa-paper-plane text-emerald-400"></i> Enviar
+                Lição ao Professor
+              </button>
+            </div>
+
+            <div id="audio-preview-box" class="hidden pt-2">
+              <p class="text-[11px] text-emerald-400 font-semibold mb-1">
+                Áudio Gravado com Sucesso:
+              </p>
+              <audio id="audio-player" controls class="w-full h-9"></audio>
+            </div>
+          </div>
+
+          <!-- Histórico de Feedbacks -->
+          <div>
+            <h3 class="text-xs font-bold text-slate-300 mb-2">
+              Últimos Feedbacks do Professor:
+            </h3>
+            <div
+              class="bg-slate-900/60 p-3 rounded-xl border border-slate-700/60 text-xs text-slate-300"
+            >
+              <div
+                class="flex items-center justify-between text-[11px] text-slate-400 mb-1"
+              >
+                <span>Lição: Rotina Diária</span>
+                <span class="text-emerald-400 font-bold">Nota 9.5/10</span>
+              </div>
+              <p class="italic text-slate-200">
+                "Excelente pronúncia na palavra 'Comfortable'! Preste atenção na
+                pronúncia do passado do verbo 'Work' (soa como T no final)."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- MODAL: CADASTRAR / EDITAR PLANO OU MATÉRIA DO PROFESSOR -->
+    <div
+      id="modal-plan"
+      class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-slate-800 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl animate-scaleUp"
+      >
+        <div
+          class="flex items-center justify-between pb-3 border-b border-slate-700 mb-4"
+        >
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-circle-plus text-indigo-400"></i>
+            <span id="modal-plan-title">Novo Plano / Matéria</span>
+          </h3>
+          <button
+            onclick="closePlanModal()"
+            class="text-slate-400 hover:text-white"
+          >
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <form
+          id="plan-form"
+          onsubmit="savePlan(event)"
+          class="space-y-3 text-xs"
+        >
+          <input type="hidden" id="plan-id" />
+
+          <div>
+            <label class="block text-slate-300 font-medium mb-1"
+              >Nome do Plano / Serviço:</label
+            >
+            <input
+              type="text"
+              id="plan-name"
+              required
+              placeholder="Ex: Inglês para Viagem (1x na semana)"
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-indigo-500"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-slate-300 font-medium mb-1"
+                >Matéria:</label
+              >
+              <input
+                type="text"
+                id="plan-subject"
+                required
+                placeholder="Ex: Inglês, Redação..."
+                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-slate-300 font-medium mb-1"
+                >Preço (R$):</label
+              >
+              <input
+                type="number"
+                step="0.01"
+                id="plan-price"
+                required
+                placeholder="380.00"
+                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-slate-300 font-medium mb-1"
+                >Tipo de Cobrança:</label
+              >
+              <select
+                id="plan-billing"
+                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-white focus:outline-none"
+              >
+                <option value="mensal">Mensalidade Recorrente</option>
+                <option value="avulso">Aula / Sessão Avulsa</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 font-medium mb-1"
+                >Frequência:</label
+              >
+              <input
+                type="text"
+                id="plan-freq"
+                placeholder="1x por semana"
+                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-medium mb-1"
+              >O que está incluso (visível na Bio):</label
+            >
+            <textarea
+              id="plan-desc"
+              rows="2"
+              placeholder="Ex: 4 aulas individuais de 60min no mês + suporte por áudio no portal"
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none"
+            ></textarea>
+          </div>
+
+          <div class="flex items-center gap-2 pt-1">
+            <input
+              type="checkbox"
+              id="plan-active"
+              checked
+              class="rounded bg-slate-900 border-slate-700 text-indigo-600 focus:ring-0"
+            />
+            <label for="plan-active" class="text-slate-300 text-[11px]"
+              >Ativo no Link da Bio do TikTok</label
+            >
+          </div>
+
+          <div
+            class="flex items-center justify-end gap-2 pt-3 border-t border-slate-700"
+          >
+            <button
+              type="button"
+              onclick="closePlanModal()"
+              class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow"
+            >
+              Salvar Alterações
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL: ATIVAR ASSINATURA PIX (R$ 39,90/mês para o Luciano) -->
+    <div
+      id="modal-subscribe"
+      class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-slate-800 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl text-center animate-scaleUp"
+      >
+        <div
+          class="w-12 h-12 mx-auto rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mb-3"
+        >
+          👑
+        </div>
+        <h3 class="text-lg font-bold text-white">Assinatura DocentePro</h3>
+        <p class="text-xs text-slate-300 mt-1">
+          7 dias grátis para conhecer. Depois, apenas <b>R$ 39,90/mês</b> para
+          manter seu link da bio, agenda e cobranças ativas.
+        </p>
+
+        <div class="my-4 p-3 bg-white rounded-xl inline-block shadow">
+          <img
+            id="sub-pix-qr"
+            src=""
+            alt="QR Code PIX Assinatura"
+            class="w-44 h-44 mx-auto"
+          />
+        </div>
+
+        <div class="text-xs text-slate-400 mb-2">
+          Beneficiário:
+          <span id="sub-pix-beneficiary" class="text-white font-semibold"
+            >LUCIANO SAAS DOCENTEPRO</span
+          ><br />
+          Valor:
+          <span class="font-bold text-emerald-400 text-sm">R$ 39,90 / mês</span>
+        </div>
+
+        <div
+          class="bg-slate-900 p-2.5 rounded-lg border border-slate-700 text-left text-[10px] font-mono break-all text-slate-300 mb-3 select-all"
+          id="sub-pix-copy"
+        >
+          <!-- PIX code -->
+        </div>
+
+        <div class="space-y-2">
+          <button
+            onclick="copyPixCode('sub-pix-copy')"
+            class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-semibold text-xs transition flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-copy"></i> Copiar Código PIX Copia-e-Cola
+          </button>
+          <button
+            onclick="confirmSubscription()"
+            class="w-full py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow"
+          >
+            <i class="fa-solid fa-check"></i> Já fiz o PIX (Liberar Acesso
+            Agora)
+          </button>
+          <button
+            onclick="closeSubscribeModal()"
+            class="w-full py-1.5 text-slate-400 hover:text-white text-xs"
+          >
+            Fechar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: CONFIGURAÇÃO DE PERFIL, REDES SOCIAIS E CHAVE PIX DO PROFESSOR -->
+    <div
+      id="modal-teacher-pix"
+      class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-slate-800 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl animate-scaleUp"
+      >
+        <div
+          class="flex items-center justify-between pb-3 border-b border-slate-700 mb-4"
+        >
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-user-gear text-indigo-400"></i> Meu Perfil,
+            Redes Sociais & PIX
+          </h3>
+          <button
+            onclick="closeTeacherPixModal()"
+            class="text-slate-400 hover:text-white"
+          >
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <form
+          id="teacher-pix-form"
+          onsubmit="saveTeacherPix(event)"
+          class="space-y-3 text-xs max-h-[80vh] overflow-y-auto pr-1"
+        >
+          <!-- Redes Sociais -->
+          <div
+            class="p-3 bg-slate-900/80 rounded-xl border border-slate-700/60 space-y-2.5"
+          >
+            <span class="font-bold text-slate-300 text-[11px] block"
+              >🌐 Suas Redes Sociais (Exibidas na Bio):</span
+            >
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-slate-400 font-medium mb-1"
+                  ><i class="fa-brands fa-x-twitter text-cyan-300 mr-1"></i>
+                  Twitter / X:</label
+                >
+                <input
+                  type="text"
+                  id="prof-twitter"
+                  placeholder="@seutwitter"
+                  class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white focus:outline-none"
+                />
+              </div>
+              <div>
+                <label class="block text-slate-400 font-medium mb-1"
+                  ><i class="fa-brands fa-tiktok text-pink-400 mr-1"></i>
+                  TikTok:</label
+                >
+                <input
+                  type="text"
+                  id="prof-tiktok"
+                  placeholder="@seutiktok"
+                  class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-slate-400 font-medium mb-1"
+                  ><i class="fa-brands fa-instagram text-pink-400 mr-1"></i>
+                  Instagram:</label
+                >
+                <input
+                  type="text"
+                  id="prof-instagram"
+                  placeholder="@seuinstagram"
+                  class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white focus:outline-none"
+                />
+              </div>
+              <div>
+                <label class="block text-slate-400 font-medium mb-1"
+                  ><i class="fa-brands fa-whatsapp text-emerald-400 mr-1"></i>
+                  WhatsApp:</label
+                >
+                <input
+                  type="text"
+                  id="prof-phone"
+                  placeholder="(11) 98765-4321"
+                  class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white focus:outline-none"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Dados Bancários PIX -->
+          <div
+            class="p-3 bg-slate-900/80 rounded-xl border border-slate-700/60 space-y-2.5"
+          >
+            <span class="font-bold text-emerald-400 text-[11px] block"
+              >💰 Sua Conta Bancária PIX (Recebimento das Aulas):</span
+            >
+
+            <div>
+              <label class="block text-slate-300 font-medium mb-1"
+                >Sua Chave PIX:</label
+              >
+              <input
+                type="text"
+                id="prof-pix-key"
+                required
+                placeholder="CPF, E-mail, Celular ou Aleatória"
+                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-white focus:outline-none focus:border-emerald-500"
+              />
+              <p class="text-[10px] text-slate-400 mt-1">
+                O valor das suas aulas particulares cai 100% direto nessa conta.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-slate-300 font-medium mb-1"
+                  >Titular (Como no Banco):</label
+                >
+                <input
+                  type="text"
+                  id="prof-pix-name"
+                  required
+                  placeholder="Ex: LUCAS SILVA"
+                  class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white focus:outline-none"
+                />
+              </div>
+              <div>
+                <label class="block text-slate-300 font-medium mb-1"
+                  >Cidade do Banco:</label
+                >
+                <input
+                  type="text"
+                  id="prof-pix-city"
+                  required
+                  placeholder="Ex: SAO PAULO"
+                  class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-slate-300 font-medium mb-1"
+                >Link da Sala (Google Meet ou Zoom):</label
+              >
+              <input
+                type="url"
+                id="prof-meet-link"
+                placeholder="https://meet.google.com/xyz-abc"
+                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-white focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div
+            class="flex items-center justify-end gap-2 pt-3 border-t border-slate-700"
+          >
+            <button
+              type="button"
+              onclick="closeTeacherPixModal()"
+              class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow"
+            >
+              Salvar Meu Perfil
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer with Legal Compliance (LGPD, Terms, Ethics) -->
+    <footer
+      class="bg-slate-950 border-t border-slate-800 text-xs text-slate-500 py-6 mt-12"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-between gap-4"
+      >
+        <div>
+          <p class="font-bold text-slate-400">
+            DocentePro &copy; 2026 - Plataforma de Infraestrutura para
+            Professores e Educadores.
+          </p>
+          <p class="text-[11px] text-slate-600 mt-0.5">
+            Software em conformidade com o Marco Civil da Internet e LGPD (Lei
+            13.709/2018). Classificação indicativa: 13+ anos.
+          </p>
+        </div>
+        <div class="flex items-center gap-4 text-slate-400">
+          <a href="/termos.html" class="hover:text-indigo-400 transition"
+            >Termos de Uso</a
+          >
+          <a href="/privacidade.html" class="hover:text-indigo-400 transition"
+            >Privacidade</a
+          >
+          <a
+            href="/api/health"
+            target="_blank"
+            class="hover:text-emerald-400 transition flex items-center gap-1"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> API
+            Status
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+      let appData = {
+        teachers: [],
+        currentTeacher: null,
+        students: [],
+        tasks: [],
+        saas: null,
+      };
+
+      // Audio recording state
+      let mediaRecorder = null;
+      let audioChunks = [];
+      let isRecording = false;
+      let recordInterval = null;
+      let recordSeconds = 0;
+
+      // View Switching
+      function switchView(viewName) {
+        ["landing", "bio", "professor", "aluno"].forEach((v) => {
+          const el = document.getElementById(`view-${v}`);
+          const tab = document.getElementById(`tab-${v}`);
+          if (el && tab) {
+            if (v === viewName) {
+              el.classList.remove("hidden");
+              el.classList.add("block");
+              tab.className =
+                "px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-2 bg-indigo-600 text-white shadow";
+            } else {
+              el.classList.add("hidden");
+              el.classList.remove("block");
+              tab.className =
+                "px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-2 text-slate-400 hover:text-white";
+            }
+          }
+        });
+        if (viewName === "professor") {
+          const sel = document.getElementById("prof-select");
+          if (sel && sel.value) loadProfessorView(sel.value);
+        } else if (viewName === "aluno") {
+          const sel = document.getElementById("aluno-select");
+          if (sel && sel.value) loadAlunoView(sel.value);
+        } else if (viewName === "bio") {
+          const sel = document.getElementById("bio-teacher-select");
+          if (sel && sel.value) loadBioView(sel.value);
+        }
+      }
+
+      // Assistente Interativo do Professor (Wizard) Helpers
+      let isWizardCollapsed = false;
+      function toggleWizardDetails() {
+        const grid = document.getElementById("wizard-cards-grid");
+        const chevron = document.getElementById("wizard-chevron");
+        const toggleText = document.getElementById("wizard-toggle-text");
+        isWizardCollapsed = !isWizardCollapsed;
+        if (isWizardCollapsed) {
+          grid.classList.add("hidden");
+          chevron.className = "fa-solid fa-chevron-down";
+          toggleText.innerText = "Expandir";
+        } else {
+          grid.classList.remove("hidden");
+          chevron.className = "fa-solid fa-chevron-up";
+          toggleText.innerText = "Recolher";
+        }
+      }
+
+      function scrollToPlansSection() {
+        const plansSection = document.getElementById("prof-plans-grid");
+        if (plansSection) {
+          plansSection.scrollIntoView({ behavior: "smooth" });
+          plansSection.classList.add("ring-2", "ring-indigo-500");
+          setTimeout(
+            () => plansSection.classList.remove("ring-2", "ring-indigo-500"),
+            2000,
+          );
+        }
+      }
+
+      function copyTeacherBioLink() {
+        const profSelect = document.getElementById("prof-select");
+        const currentTeacherId = profSelect ? profSelect.value : "prof_lucas";
+        const teacherObj =
+          (appData.teachers || []).find((t) => t.id === currentTeacherId) ||
+          appData.teachers[0];
+        const link = `${window.location.origin}/?view=bio&teacher=${teacherObj ? teacherObj.slug : "teacherlucas"}`;
+        navigator.clipboard.writeText(link);
+        alert(
+          `Link da Bio copiado com sucesso!\n\n${link}\n\nCole na sua bio do TikTok, Instagram ou Twitter (X)!`,
+        );
+      }
+
+      function shareOnTwitter() {
+        const profSelect = document.getElementById("prof-select");
+        const currentTeacherId = profSelect ? profSelect.value : "prof_lucas";
+        const teacherObj =
+          (appData.teachers || []).find((t) => t.id === currentTeacherId) ||
+          appData.teachers[0];
+        const link = `${window.location.origin}/?view=bio&teacher=${teacherObj ? teacherObj.slug : "teacherlucas"}`;
+        const text = encodeURIComponent(
+          `Agende sua aula particular comigo no meu Link da Bio oficial e pague via PIX direto: ${link}`,
+        );
+        window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
+      }
+
+      // Landing Page Step Switcher
+      function selectLandingStep(num) {
+        for (let i = 1; i <= 4; i++) {
+          const box = document.getElementById(`lstep-box-${i}`);
+          const btn = document.getElementById(`lstep-btn-${i}`);
+          if (box && btn) {
+            if (i === num) {
+              box.classList.remove("hidden");
+              box.classList.add("block");
+              btn.className =
+                "p-3.5 rounded-xl border text-left transition bg-indigo-600/20 border-indigo-500 text-white shadow";
+            } else {
+              box.classList.add("hidden");
+              box.classList.remove("block");
+              btn.className =
+                "p-3.5 rounded-xl border text-left transition bg-slate-950 border-slate-800 text-slate-400 hover:text-white";
+            }
+          }
+        }
+      }
+
+      // Landing Page Calculator
+      function updateLandingCalculator() {
+        const studentsInput = document.getElementById("lcalc-students");
+        const feeInput = document.getElementById("lcalc-fee");
+        if (!studentsInput || !feeInput) return;
+
+        const students = parseInt(studentsInput.value, 10);
+        const fee = parseFloat(feeInput.value);
+
+        document.getElementById("lcalc-students-val").innerText =
+          `${students} Alunos`;
+        document.getElementById("lcalc-fee-val").innerText =
+          `R$ ${fee.toFixed(2)}`;
+
+        const gross = students * fee;
+        document.getElementById("lcalc-gross").innerText =
+          `R$ ${gross.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
+
+        const otherFees = gross * 0.0899 + students * 2.49 + 4.9;
+        document.getElementById("lcalc-loss").innerText =
+          `- R$ ${otherFees.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}/mês`;
+
+        const monthlySavings = otherFees - 39.9;
+        const yearlySavings = monthlySavings > 0 ? monthlySavings * 12 : 0;
+        document.getElementById("lcalc-savings").innerText =
+          `R$ ${yearlySavings.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
+      }
+
+      // Initial Data Fetch
+      async function initApp() {
+        try {
+          const res = await fetch("/api/saas/summary");
+          const data = await res.json();
+          appData.teachers = data.teachers || [];
+          appData.saas = data.saas;
+
+          // Populate Teacher Selectors
+          const bioSelect = document.getElementById("bio-teacher-select");
+          const profSelect = document.getElementById("prof-select");
+          bioSelect.innerHTML = "";
+          profSelect.innerHTML = "";
+
+          appData.teachers.forEach((t) => {
+            const opt1 = new Option(`${t.name} (${t.subjectCategory})`, t.slug);
+            const opt2 = new Option(`${t.name} (${t.subjectCategory})`, t.id);
+            bioSelect.add(opt1);
+            profSelect.add(opt2);
+          });
+
+          // Set default teacher
+          if (appData.teachers.length > 0) {
+            loadBioView(appData.teachers[0].slug);
+            loadProfessorView(appData.teachers[0].id);
+          }
+
+          // Populate Student Selector
+          const resStudents = await fetch(
+            "/api/teachers/" + appData.teachers[0].id + "/dashboard",
+          );
+          const dashData = await resStudents.json();
+          const alunoSelect = document.getElementById("aluno-select");
+          alunoSelect.innerHTML = "";
+          (dashData.students || []).forEach((s) => {
+            alunoSelect.add(new Option(s.name, s.id));
+          });
+          if (dashData.students && dashData.students.length > 0) {
+            loadAlunoView(dashData.students[0].id);
+          }
+
+          // Check if specific view requested via URL (?view=professor or ?view=bio)
+          const urlParams = new URLSearchParams(window.location.search);
+          const reqView = urlParams.get("view") || "landing";
+          switchView(reqView);
+
+          updateLandingCalculator();
+        } catch (err) {
+          console.error("Erro ao iniciar app:", err);
+        }
+      }
+
+      // 1. BIO VIEW (TIKTOK FUNNEL)
+      async function loadBioView(slug) {
+        try {
+          const res = await fetch(`/api/teachers/${slug}`);
+          const teacher = await res.json();
+          appData.currentTeacher = teacher;
+
+          document.getElementById("bio-name").innerText = teacher.name;
+          document.getElementById("bio-headline").innerText = teacher.headline;
+          document.getElementById("bio-desc").innerText = teacher.bio;
+          document.getElementById("bio-tiktok").innerText =
+            teacher.tiktokUser || "@teacher";
+
+          // Redes Sociais no Topo da Bio
+          const twitterBtn = document.getElementById("bio-social-twitter");
+          const twitterText = document.getElementById("bio-twitter-text");
+          if (teacher.twitter) {
+            twitterBtn.href = teacher.twitter.startsWith("http")
+              ? teacher.twitter
+              : `https://x.com/${teacher.twitter.replace("@", "")}`;
+            twitterText.innerText = teacher.twitter;
+            twitterBtn.classList.remove("hidden");
+          } else {
+            twitterBtn.classList.add("hidden");
+          }
+
+          const tiktokBtn = document.getElementById("bio-social-tiktok");
+          const tiktokText = document.getElementById("bio-tiktok-text");
+          if (teacher.tiktokUser) {
+            tiktokBtn.href = teacher.tiktokUser.startsWith("http")
+              ? teacher.tiktokUser
+              : `https://tiktok.com/@${teacher.tiktokUser.replace("@", "")}`;
+            tiktokText.innerText = teacher.tiktokUser;
+            tiktokBtn.classList.remove("hidden");
+          } else {
+            tiktokBtn.classList.add("hidden");
+          }
+
+          const instaBtn = document.getElementById("bio-social-instagram");
+          const instaText = document.getElementById("bio-insta-text");
+          if (teacher.instagram) {
+            instaBtn.href = teacher.instagram.startsWith("http")
+              ? teacher.instagram
+              : `https://instagram.com/${teacher.instagram.replace("@", "")}`;
+            instaText.innerText = teacher.instagram;
+            instaBtn.classList.remove("hidden");
+          } else {
+            instaBtn.classList.add("hidden");
+          }
+
+          // Render Plans in Bio
+          const plansList = document.getElementById("bio-plans-list");
+          const triagePlanSelect = document.getElementById("triage-plan");
+          plansList.innerHTML = "";
+          triagePlanSelect.innerHTML = "";
+
+          const activePlans = (teacher.plans || []).filter(
+            (p) => p.active !== false,
+          );
+
+          if (activePlans.length === 0) {
+            plansList.innerHTML = `<p class="text-xs text-slate-400 italic">Nenhum plano ativo no momento.</p>`;
+          } else {
+            activePlans.forEach((p) => {
+              const card = document.createElement("div");
+              card.className =
+                "p-3.5 bg-slate-900/90 rounded-xl border border-slate-700/80 hover:border-indigo-500/50 transition";
+              card.innerHTML = `
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-bold text-sm text-white">${p.name}</span>
+                <span class="text-xs font-black text-emerald-400">R$ ${p.price.toFixed(2)} ${p.billingType === "mensal" ? '<span class="text-[10px] text-slate-400 font-normal">/mês</span>' : '<span class="text-[10px] text-slate-400 font-normal">avulso</span>'}</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mb-2">${p.description}</p>
+              <div class="flex items-center justify-between text-[10px] text-slate-500">
+                <span><i class="fa-solid fa-clock text-indigo-400"></i> ${p.frequency || "Horário flexível"}</span>
+                <span class="bg-indigo-900/40 text-indigo-300 px-2 py-0.5 rounded">${p.subject}</span>
+              </div>
+            `;
+              plansList.appendChild(card);
+
+              // Add to triage select
+              triagePlanSelect.add(
+                new Option(`${p.name} - R$ ${p.price.toFixed(2)}`, p.id),
+              );
+            });
+          }
+        } catch (err) {
+          console.error("Erro ao carregar Bio:", err);
+        }
+      }
+
+      // Submit Triage from Bio
+      async function submitTriage(e) {
+        e.preventDefault();
+        if (!appData.currentTeacher) return;
+
+        const planSelect = document.getElementById("triage-plan");
+        const chosenPlan =
+          (appData.currentTeacher.plans || []).find(
+            (p) => p.id === planSelect.value,
+          ) || {};
+
+        const payload = {
+          teacherId: appData.currentTeacher.id,
+          name: document.getElementById("triage-name").value,
+          whatsapp: document.getElementById("triage-whatsapp").value,
+          level: document.getElementById("triage-level").value,
+          preferredTime: document.getElementById("triage-time").value,
+          planChosen: chosenPlan.name || "Plano Personalizado",
+          value: chosenPlan.price || 50.0,
+          origin: `TikTok ${appData.currentTeacher.tiktokUser}`,
+        };
+
+        try {
+          const res = await fetch("/api/leads", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json();
+
+          // Show PIX Modal
+          const pixBox = document.getElementById("bio-pix-modal");
+          document.getElementById("bio-pix-qrcode").src = data.pix.qrCodeUrl;
+          document.getElementById("bio-pix-val").innerText =
+            `R$ ${data.pix.amount.toFixed(2)}`;
+          document.getElementById("bio-pix-copy").innerText = data.pix.payload;
+          pixBox.classList.remove("hidden");
+          pixBox.scrollIntoView({ behavior: "smooth" });
+        } catch (err) {
+          alert("Erro ao enviar: " + err.message);
+        }
+      }
+
+      // 2. PROFESSOR DASHBOARD
+      async function loadProfessorView(teacherId) {
+        try {
+          const res = await fetch(`/api/teachers/${teacherId}/dashboard`);
+          const data = await res.json();
+          const t = data.teacher;
+
+          document.getElementById("prof-dash-name").innerText = t.name;
+          document.getElementById("prof-dash-headline").innerText = t.headline;
+
+          // Configura Banner de 7 Dias Grátis vs Assinante vs Expirado
+          const banner = document.getElementById("prof-trial-banner");
+          const icon = document.getElementById("prof-trial-icon");
+          const title = document.getElementById("prof-trial-title");
+          const sub = document.getElementById("prof-trial-sub");
+          const btnText = document.getElementById("prof-trial-btn-text");
+          const badge = document.getElementById("prof-dash-badge");
+
+          if (t.saasStatus === "trial") {
+            banner.className =
+              "p-4 rounded-2xl border border-amber-500/40 bg-amber-950/20 flex flex-wrap items-center justify-between gap-3 animate-fadeIn";
+            icon.innerText = "🎁";
+            icon.className =
+              "w-10 h-10 rounded-xl flex items-center justify-center text-xl font-bold bg-amber-500/20 text-amber-400";
+            title.innerText = "Período de Avaliação Gratuita (7 Dias Grátis)";
+            sub.innerHTML = `Você está no teste gratuito. <b>Restam ${t.trialDaysRemaining || 4} dias</b> para usar sem pagar nada! Depois apenas R$ 39,90/mês.`;
+            btnText.innerText = "Ativar Assinatura (R$ 39,90 via PIX)";
+            badge.innerText = `7 Dias Grátis (Restam ${t.trialDaysRemaining || 4}d)`;
+            badge.className =
+              "px-2 py-0.5 rounded text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30";
+          } else if (t.saasStatus === "expirado") {
+            banner.className =
+              "p-4 rounded-2xl border border-red-500/40 bg-red-950/30 flex flex-wrap items-center justify-between gap-3 animate-fadeIn";
+            icon.innerText = "⚠️";
+            icon.className =
+              "w-10 h-10 rounded-xl flex items-center justify-center text-xl font-bold bg-red-500/20 text-red-400";
+            title.innerText = "Seu Teste de 7 Dias Grátis Encerrou!";
+            sub.innerHTML =
+              "Para continuar com o link da bio do TikTok e cobrança automática ativas, realize o pagamento de <b>R$ 39,90</b>.";
+            btnText.innerText = "Desbloquear Agora via PIX (R$ 39,90)";
+            badge.innerText = "Teste Expirado (Bloqueado)";
+            badge.className =
+              "px-2 py-0.5 rounded text-[11px] font-bold bg-red-500/20 text-red-300 border border-red-500/30";
+          } else {
+            banner.className =
+              "p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 flex flex-wrap items-center justify-between gap-3 animate-fadeIn";
+            icon.innerText = "✅";
+            icon.className =
+              "w-10 h-10 rounded-xl flex items-center justify-center text-xl font-bold bg-emerald-500/20 text-emerald-400";
+            title.innerText = "Assinatura Ativa (R$ 39,90/mês)";
+            sub.innerHTML =
+              "Conta 100% liberada com alunos e matérias ilimitadas. Próxima renovação no dia 1º.";
+            btnText.innerText = "Ver Dados do PIX da Assinatura";
+            badge.innerText = "Assinante Ativo (R$ 39,90/mês)";
+            badge.className =
+              "px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+          }
+
+          // KPIs
+          document.getElementById("kpi-total-alunos").innerText =
+            data.metrics.totalAlunos;
+          document.getElementById("kpi-faturamento").innerText =
+            `R$ ${data.metrics.faturamentoPrevisto.toFixed(2)}`;
+          document.getElementById("kpi-pagos").innerText =
+            `${data.metrics.alunosPagos} Pagos`;
+          document.getElementById("kpi-pendentes").innerText =
+            `${data.metrics.alunosPendentes} Pendentes`;
+          document.getElementById("kpi-leads").innerText =
+            data.metrics.totalLeadsTikTok;
+          document.getElementById("tasks-badge").innerText =
+            `${data.metrics.tarefasParaCorrigir} pendentes`;
+
+          // Atualiza status dinâmico do Assistente do Professor (Wizard)
+          const step1Status = document.getElementById("wizard-step1-status");
+          if (step1Status) {
+            if (t.pixKey) {
+              step1Status.innerText = "Configurado ✅";
+              step1Status.className =
+                "text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold";
+            } else {
+              step1Status.innerText = "Pendente ⚠️";
+              step1Status.className =
+                "text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 font-bold";
+            }
+          }
+          const step2Status = document.getElementById("wizard-step2-status");
+          if (step2Status) {
+            const numActivePlans = (t.plans || []).filter(
+              (p) => p.active !== false,
+            ).length;
+            step2Status.innerText = `${numActivePlans} Planos Ativos ✅`;
+            step2Status.className =
+              "text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold";
+          }
+
+          // Render Plans Manager (Customizable!)
+          const plansGrid = document.getElementById("prof-plans-grid");
+          plansGrid.innerHTML = "";
+
+          (t.plans || []).forEach((p) => {
+            const card = document.createElement("div");
+            card.className = `p-4 rounded-xl border transition ${p.active ? "bg-slate-900 border-slate-700" : "bg-slate-900/40 border-slate-800 opacity-60"}`;
+            card.innerHTML = `
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">${p.subject}</span>
+              <button onclick="togglePlanStatus('${t.id}', '${p.id}', ${!p.active})" class="text-[10px] px-2 py-0.5 rounded-full font-bold ${p.active ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-slate-800 text-slate-400"}">
+                ${p.active ? "🟢 Ativo na Bio" : "⚪ Pausado"}
+              </button>
+            </div>
+            <h3 class="font-bold text-sm text-white mb-1">${p.name}</h3>
+            <div class="text-lg font-black text-emerald-400 mb-2">
+              R$ ${p.price.toFixed(2)} <span class="text-xs text-slate-400 font-normal">/${p.billingType}</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mb-3">${p.description}</p>
+            <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-800">
+              <button onclick="editPlan('${p.id}')" class="text-slate-400 hover:text-white flex items-center gap-1">
+                <i class="fa-solid fa-pen-to-square"></i> Editar
+              </button>
+              <button onclick="deletePlan('${t.id}', '${p.id}')" class="text-red-400 hover:text-red-300 flex items-center gap-1">
+                <i class="fa-solid fa-trash"></i> Excluir
+              </button>
+            </div>
+          `;
+            plansGrid.appendChild(card);
+          });
+
+          // Render Students Table
+          const studentsTbody = document.getElementById("prof-students-table");
+          studentsTbody.innerHTML = "";
+          (data.students || []).forEach((s) => {
+            const tr = document.createElement("tr");
+            tr.className = "hover:bg-slate-800/40 transition";
+            const isPago = s.paymentStatus === "pago";
+            tr.innerHTML = `
+            <td class="p-3">
+              <div class="font-bold text-white">${s.name}</div>
+              <div class="text-[11px] text-slate-400">${s.whatsapp}</div>
+            </td>
+            <td class="p-3">${s.planName}</td>
+            <td class="p-3 font-semibold text-emerald-400">R$ ${s.monthlyFee.toFixed(2)}</td>
+            <td class="p-3">${s.dayOfWeek} ${s.timeSlot}</td>
+            <td class="p-3">
+              <button onclick="toggleStudentPayment('${s.id}')" class="px-2 py-0.5 rounded text-[11px] font-bold ${isPago ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-amber-500/20 text-amber-400 border border-amber-500/30"}">
+                ${isPago ? "✅ Pago" : "⏳ Cobrar PIX"}
+              </button>
+            </td>
+            <td class="p-3 text-right">
+              <a href="${t.meetLinkDefault}" target="_blank" class="px-2.5 py-1 bg-indigo-600/80 hover:bg-indigo-600 text-white rounded text-[11px] font-semibold">
+                Iniciar Aula
+              </a>
+            </td>
+          `;
+            studentsTbody.appendChild(tr);
+          });
+
+          // Render Tasks to review
+          const tasksBox = document.getElementById("prof-tasks-list");
+          tasksBox.innerHTML = "";
+          (data.tasks || []).forEach((task) => {
+            const card = document.createElement("div");
+            card.className =
+              "p-3 bg-slate-900/90 rounded-xl border border-slate-700/60 text-xs space-y-2";
+            card.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-white">${task.studentName}</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded ${task.status === "corrigido" ? "bg-emerald-500/20 text-emerald-400" : "bg-pink-500/20 text-pink-400"}">
+                ${task.type === "audio" ? "🎙️ Áudio" : "📄 PDF"}
+              </span>
+            </div>
+            <p class="text-slate-300 text-[11px]">${task.title}</p>
+            ${
+              task.feedback
+                ? `
+              <div class="text-[11px] text-emerald-400 bg-emerald-950/40 p-2 rounded border border-emerald-500/20">
+                <b>Seu Feedback:</b> ${task.feedback}
+              </div>
+            `
+                : `
+              <div class="flex items-center gap-2 pt-1">
+                <input type="text" id="feedback-input-${task.id}" placeholder="Digitar feedback rápido..." class="flex-1 bg-slate-950 border border-slate-700 rounded px-2 py-1 text-white text-[11px]">
+                <button onclick="reviewTask('${task.id}')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold text-[11px]">
+                  Enviar
+                </button>
+              </div>
+            `
+            }
+          `;
+            tasksBox.appendChild(card);
+          });
+        } catch (err) {
+          console.error("Erro no dashboard professor:", err);
+        }
+      }
+
+      // Toggle Student Payment PIX
+      async function toggleStudentPayment(studentId) {
+        try {
+          await fetch(`/api/students/${studentId}/payment`, { method: "PUT" });
+          const sel = document.getElementById("prof-select");
+          loadProfessorView(sel.value);
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+
+      // Review Task
+      async function reviewTask(taskId) {
+        const input = document.getElementById(`feedback-input-${taskId}`);
+        if (!input || !input.value.trim()) return;
+
+        try {
+          await fetch(`/api/tasks/${taskId}/review`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ feedback: input.value, score: "Excelente" }),
+          });
+          const sel = document.getElementById("prof-select");
+          loadProfessorView(sel.value);
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+
+      // Plan Management Modals
+      function openNewPlanModal() {
+        document.getElementById("modal-plan-title").innerText =
+          "Novo Plano / Matéria";
+        document.getElementById("plan-id").value = "";
+        document.getElementById("plan-name").value = "";
+        document.getElementById("plan-subject").value = appData.currentTeacher
+          ? appData.currentTeacher.subjectCategory
+          : "Inglês";
+        document.getElementById("plan-price").value = "350.00";
+        document.getElementById("plan-desc").value = "";
+        document.getElementById("modal-plan").classList.remove("hidden");
+      }
+
+      function closePlanModal() {
+        document.getElementById("modal-plan").classList.add("hidden");
+      }
+
+      function editPlan(planId) {
+        const teacher = appData.currentTeacher;
+        const plan = (teacher.plans || []).find((p) => p.id === planId);
+        if (!plan) return;
+
+        document.getElementById("modal-plan-title").innerText =
+          "Editar Plano / Preço";
+        document.getElementById("plan-id").value = plan.id;
+        document.getElementById("plan-name").value = plan.name;
+        document.getElementById("plan-subject").value = plan.subject;
+        document.getElementById("plan-price").value = plan.price;
+        document.getElementById("plan-desc").value = plan.description;
+        document.getElementById("plan-freq").value =
+          plan.frequency || "1x por semana";
+        document.getElementById("plan-billing").value =
+          plan.billingType || "mensal";
+        document.getElementById("plan-active").checked = plan.active !== false;
+
+        document.getElementById("modal-plan").classList.remove("hidden");
+      }
+
+      async function savePlan(e) {
+        e.preventDefault();
+        const teacherId = document.getElementById("prof-select").value;
+        const planId = document.getElementById("plan-id").value;
+
+        const payload = {
+          name: document.getElementById("plan-name").value,
+          subject: document.getElementById("plan-subject").value,
+          price: Number(document.getElementById("plan-price").value),
+          billingType: document.getElementById("plan-billing").value,
+          frequency: document.getElementById("plan-freq").value,
+          description: document.getElementById("plan-desc").value,
+          active: document.getElementById("plan-active").checked,
+        };
+
+        try {
+          if (planId) {
+            // Edit
+            await fetch(`/api/teachers/${teacherId}/plans/${planId}`, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+          } else {
+            // Add
+            await fetch(`/api/teachers/${teacherId}/plans`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+          }
+
+          closePlanModal();
+          loadProfessorView(teacherId);
+          loadBioView(appData.teachers.find((t) => t.id === teacherId).slug);
+        } catch (err) {
+          alert("Erro ao salvar plano: " + err.message);
+        }
+      }
+
+      async function togglePlanStatus(teacherId, planId, newStatus) {
+        try {
+          await fetch(`/api/teachers/${teacherId}/plans/${planId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ active: newStatus }),
+          });
+          loadProfessorView(teacherId);
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+
+      async function deletePlan(teacherId, planId) {
+        if (!confirm("Deseja realmente excluir este plano?")) return;
+        try {
+          await fetch(`/api/teachers/${teacherId}/plans/${planId}`, {
+            method: "DELETE",
+          });
+          loadProfessorView(teacherId);
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+
+      // Modal de Assinatura do Professor (R$ 39,90 para o Luciano)
+      async function openSubscribeModal() {
+        const teacherId = document.getElementById("prof-select").value;
+        try {
+          const res = await fetch(`/api/teachers/${teacherId}/subscribe-pix`, {
+            method: "POST",
+          });
+          const data = await res.json();
+
+          document.getElementById("sub-pix-qr").src = data.qrCodeUrl;
+          document.getElementById("sub-pix-copy").innerText = data.payload;
+          document.getElementById("sub-pix-beneficiary").innerText =
+            data.recipient;
+          document.getElementById("modal-subscribe").classList.remove("hidden");
+        } catch (err) {
+          alert("Erro ao gerar PIX de assinatura: " + err.message);
+        }
+      }
+
+      function closeSubscribeModal() {
+        document.getElementById("modal-subscribe").classList.add("hidden");
+      }
+
+      async function confirmSubscription() {
+        const teacherId = document.getElementById("prof-select").value;
+        try {
+          const res = await fetch(
+            `/api/teachers/${teacherId}/confirm-subscription`,
+            { method: "POST" },
+          );
+          const data = await res.json();
+          alert(
+            "🎉 Parabéns! Sua assinatura de R$ 39,90/mês foi ativada com sucesso!",
+          );
+          closeSubscribeModal();
+          loadProfessorView(teacherId);
+        } catch (err) {
+          alert("Erro ao ativar: " + err.message);
+        }
+      }
+
+      // Modal de Perfil, Redes Sociais e Chave PIX do Professor
+      function openTeacherPixModal() {
+        const t = appData.currentTeacher;
+        if (!t) return;
+        document.getElementById("prof-twitter").value = t.twitter || "";
+        document.getElementById("prof-tiktok").value = t.tiktokUser || "";
+        document.getElementById("prof-instagram").value = t.instagram || "";
+        document.getElementById("prof-phone").value = t.phone || "";
+        document.getElementById("prof-pix-key").value = t.pixKey || "";
+        document.getElementById("prof-pix-name").value = t.pixName || "";
+        document.getElementById("prof-pix-city").value =
+          t.pixCity || "SAO PAULO";
+        document.getElementById("prof-meet-link").value =
+          t.meetLinkDefault || "";
+        document.getElementById("modal-teacher-pix").classList.remove("hidden");
+      }
+
+      function closeTeacherPixModal() {
+        document.getElementById("modal-teacher-pix").classList.add("hidden");
+      }
+
+      async function saveTeacherPix(e) {
+        e.preventDefault();
+        const teacherId = document.getElementById("prof-select").value;
+        const payload = {
+          twitter: document.getElementById("prof-twitter").value,
+          tiktokUser: document.getElementById("prof-tiktok").value,
+          instagram: document.getElementById("prof-instagram").value,
+          phone: document.getElementById("prof-phone").value,
+          pixKey: document.getElementById("prof-pix-key").value,
+          pixName: document.getElementById("prof-pix-name").value,
+          pixCity: document.getElementById("prof-pix-city").value,
+          meetLinkDefault: document.getElementById("prof-meet-link").value,
+        };
+
+        try {
+          await fetch(`/api/teachers/${teacherId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          alert("Perfil, redes sociais e chave PIX salvos com sucesso!");
+          closeTeacherPixModal();
+          loadProfessorView(teacherId);
+          loadBioView(appData.teachers.find((t) => t.id === teacherId).slug);
+        } catch (err) {
+          alert("Erro ao salvar: " + err.message);
+        }
+      }
+
+      // 3. STUDENT PORTAL
+      async function loadAlunoView(studentId) {
+        try {
+          const res = await fetch(`/api/students/${studentId}`);
+          const data = await res.json();
+          const s = data.student;
+
+          document.getElementById("aluno-name").innerText = s.name;
+          document.getElementById("aluno-sub").innerText =
+            `Plano: ${s.planName} (${data.teacher.name})`;
+          document.getElementById("aluno-next-class").innerText =
+            `${s.dayOfWeek} às ${s.timeSlot}`;
+          document.getElementById("aluno-teacher-name").innerText =
+            `Com ${data.teacher.name}`;
+          document.getElementById("aluno-meet-btn").href =
+            data.teacher.meetLink;
+
+          // PIX & Status
+          const isPago = s.paymentStatus === "pago";
+          const badge = document.getElementById("aluno-status-badge");
+          badge.innerText = isPago
+            ? "✅ Mensalidade em Dia"
+            : "⏳ Aguardando Pagamento PIX";
+          badge.className = `px-2.5 py-1 rounded-full text-xs font-bold ${isPago ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-amber-500/20 text-amber-400 border border-amber-500/30"}`;
+
+          document.getElementById("aluno-pix-val").innerText =
+            `R$ ${s.monthlyFee.toFixed(2)}`;
+          document.getElementById("aluno-pix-due").innerText = s.dueDate;
+          document.getElementById("aluno-pix-qr").src = data.pix.qrCodeUrl;
+          document.getElementById("aluno-pix-payload").innerText =
+            data.pix.payload;
+        } catch (err) {
+          console.error("Erro na visão do aluno:", err);
+        }
+      }
+
+      // Audio Recording Web API
+      async function toggleAudioRecording() {
+        const btn = document.getElementById("btn-record-audio");
+        const recText = document.getElementById("rec-text");
+        const recIcon = document.getElementById("rec-icon");
+        const recTimer = document.getElementById("rec-timer");
+
+        if (!isRecording) {
+          // Start recording
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+              audio: true,
+            });
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+
+            mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
+            mediaRecorder.onstop = () => {
+              const audioBlob = new Blob(audioChunks, { type: "audio/mp3" });
+              const audioUrl = URL.createObjectURL(audioBlob);
+              const player = document.getElementById("audio-player");
+              player.src = audioUrl;
+              document
+                .getElementById("audio-preview-box")
+                .classList.remove("hidden");
+            };
+
+            mediaRecorder.start();
+            isRecording = true;
+            recText.innerText = "Parar Gravação";
+            recIcon.className = "fa-solid fa-stop text-white";
+            btn.className =
+              "px-4 py-2.5 bg-red-600 hover:bg-red-500 text-white text-xs font-bold rounded-xl transition flex items-center gap-2 shadow-lg shadow-red-600/30 animate-pulse";
+
+            recordSeconds = 0;
+            recTimer.classList.remove("hidden");
+            recordInterval = setInterval(() => {
+              recordSeconds++;
+              const mins = String(Math.floor(recordSeconds / 60)).padStart(
+                2,
+                "0",
+              );
+              const secs = String(recordSeconds % 60).padStart(2, "0");
+              recTimer.innerText = `${mins}:${secs}`;
+            }, 1000);
+          } catch (err) {
+            alert(
+              "Permissão de microfone necessária ou microfone indisponível no dispositivo. Simulando envio de áudio...",
+            );
+            document
+              .getElementById("audio-preview-box")
+              .classList.remove("hidden");
+          }
+        } else {
+          // Stop recording
+          if (mediaRecorder && mediaRecorder.state !== "inactive") {
+            mediaRecorder.stop();
+          }
+          clearInterval(recordInterval);
+          isRecording = false;
+          recText.innerText = "Gravar Novo Áudio";
+          recIcon.className = "fa-solid fa-circle text-xs";
+          btn.className =
+            "px-4 py-2.5 bg-pink-600 hover:bg-pink-500 text-white text-xs font-bold rounded-xl transition flex items-center gap-2 shadow-lg shadow-pink-600/30";
+        }
+      }
+
+      async function submitAudioTaskDemo() {
+        const studentId = document.getElementById("aluno-select").value;
+        try {
+          await fetch("/api/tasks/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              studentId,
+              studentName: document.getElementById("aluno-name").innerText,
+              title: "Áudio de Pronúncia Prática da Semana",
+              type: "audio",
+            }),
+          });
+          alert("Lição enviada com sucesso ao seu professor!");
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+
+      // Helper: Copy PIX
+      function copyPixCode(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text);
+        alert("Código PIX Copia-e-Cola copiado para a área de transferência!");
+      }
+
+      // Start app on load
+      window.addEventListener("DOMContentLoaded", initApp);
+    </script>
+  </body>
+</html>

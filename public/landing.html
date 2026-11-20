@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocentePro - A Plataforma Definitiva para Professores Particulares</title>
+  <meta name="description" content="Transforme seguidores do TikTok, Instagram e Twitter/X em alunos pagantes particulares. Link da Bio com triagem, 100% no seu PIX, portal com áudios e tarefas. 7 dias grátis!">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .gradient-hero {
+      background: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.18) 0%, rgba(15, 23, 42, 0) 70%),
+                  radial-gradient(circle at 80% 50%, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0) 60%);
+    }
+    .gradient-border {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(16, 185, 129, 0.4));
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+  <!-- ========================================== -->
+  <!-- 1. HEADER & TOP NAVIGATION                 -->
+  <!-- ========================================== -->
+  <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-indigo-600 to-emerald-400 flex items-center justify-center text-white font-extrabold text-2xl shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-2xl font-black tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-300 bg-clip-text text-transparent">DocentePro</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold uppercase tracking-wider">SaaS 24/7</span>
+          </div>
+          <p class="text-[11px] text-slate-400 font-medium">Ecossistema para Professores Particulares</p>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+        <a href="#como-funciona" class="hover:text-indigo-400 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-wand-magic-sparkles text-indigo-400 text-xs"></i> Passo a Passo
+        </a>
+        <a href="#recursos" class="hover:text-indigo-400 transition">Recursos</a>
+        <a href="#calculadora" class="hover:text-emerald-400 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-calculator text-emerald-400 text-xs"></i> Simulador de Lucro
+        </a>
+        <a href="#planos" class="hover:text-indigo-400 transition">Preço Único</a>
+        <a href="#faq" class="hover:text-indigo-400 transition">Dúvidas</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <a href="/index.html?view=professor" class="hidden sm:flex text-xs font-bold text-slate-300 hover:text-white px-4 py-2.5 rounded-xl border border-slate-800 hover:border-slate-700 bg-slate-900/60 transition items-center gap-2">
+          <i class="fa-solid fa-chalkboard-user text-indigo-400"></i> Painel do Professor
+        </a>
+        <a href="/index.html?view=professor" class="text-xs sm:text-sm font-extrabold bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white px-5 py-2.5 rounded-xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition flex items-center gap-2">
+          <span>7 Dias Grátis</span>
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- 2. HERO SECTION                            -->
+  <!-- ========================================== -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 gradient-hero overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      
+      <!-- Top Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-indigo-500/30 text-xs font-bold text-indigo-300 shadow-xl mb-6">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>7 Dias Grátis para Conhecer e Usar • Zero Taxas por Aluno</span>
+        <span class="text-slate-600">|</span>
+        <span class="text-emerald-400 font-extrabold">100% no seu PIX</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-5xl mx-auto leading-[1.1]">
+        Transforme Seguidores das Redes em <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">Alunos Pagantes</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="mt-6 text-base sm:text-xl text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed">
+        A ferramenta completa para educadores de <b>Inglês, Redação ENEM, Espanhol, Matemática e Reforço</b> com audiência no <b>TikTok, Instagram e Twitter/X</b>.
+        Link da Bio com triagem automática, cobrança no seu PIX sem intermediários e portal do aluno com áudios e tarefas.
+      </p>
+
+      <!-- Trust Pillars -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-slate-400">
+        <div class="flex items-center gap-1.5 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-800">
+          <i class="fa-solid fa-check text-emerald-400"></i> Seu Dinheiro cai 100% no seu PIX
+        </div>
+        <div class="flex items-center gap-1.5 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-800">
+          <i class="fa-solid fa-check text-emerald-400"></i> Sem taxa percentual (Não é Kiwify)
+        </div>
+        <div class="flex items-center gap-1.5 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-800">
+          <i class="fa-solid fa-check text-emerald-400"></i> Alterne matérias e preços livremente
+        </div>
+        <div class="flex items-center gap-1.5 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-800">
+          <i class="fa-solid fa-check text-emerald-400"></i> Apenas R$ 39,90/mês após o teste
+        </div>
+      </div>
+
+      <!-- Hero CTAs -->
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a href="#como-funciona" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 transition flex items-center justify-center gap-3">
+          <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+          <span>Ver Passo a Passo Interativo</span>
+        </a>
+        <a href="/index.html?view=professor" class="w-full sm:w-auto px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold text-base rounded-2xl border border-slate-700 hover:border-slate-600 shadow-xl transition flex items-center justify-center gap-3">
+          <i class="fa-solid fa-chalkboard-user text-indigo-400"></i>
+          <span>Acessar Painel do Professor</span>
+        </a>
+        <a href="/index.html?view=bio" class="w-full sm:w-auto px-6 py-4 bg-slate-900/40 hover:bg-slate-900 text-slate-300 hover:text-white font-bold text-sm rounded-2xl border border-slate-800 transition flex items-center justify-center gap-2">
+          <i class="fa-brands fa-tiktok text-cyan-400"></i>
+          <i class="fa-brands fa-x-twitter text-slate-200"></i>
+          <span>Ver Demonstração do Link da Bio</span>
+        </a>
+      </div>
+
+      <!-- Social Media Badges -->
+      <div class="mt-14 pt-8 border-t border-slate-800/80 max-w-4xl mx-auto flex flex-wrap items-center justify-around gap-6 text-slate-400 text-sm">
+        <span class="text-xs uppercase tracking-wider font-bold text-slate-500">Integrado com suas redes:</span>
+        <div class="flex items-center gap-2 text-slate-300 font-bold">
+          <i class="fa-brands fa-tiktok text-cyan-400 text-lg"></i> TikTok
+        </div>
+        <div class="flex items-center gap-2 text-slate-300 font-bold">
+          <i class="fa-brands fa-x-twitter text-white text-lg"></i> Twitter (X)
+        </div>
+        <div class="flex items-center gap-2 text-slate-300 font-bold">
+          <i class="fa-brands fa-instagram text-pink-400 text-lg"></i> Instagram
+        </div>
+        <div class="flex items-center gap-2 text-slate-300 font-bold">
+          <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i> WhatsApp
+        </div>
+        <div class="flex items-center gap-2 text-slate-300 font-bold">
+          <i class="fa-solid fa-qrcode text-emerald-400 text-lg"></i> PIX Oficial Banco Central
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 3. PASSO A PASSO INTERATIVO DO PROFESSOR   -->
+  <!-- ========================================== -->
+  <section id="como-funciona" class="py-20 bg-slate-900/80 border-y border-slate-800 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-bold uppercase tracking-wider mb-3">
+          <i class="fa-solid fa-route"></i> Como Funciona
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          Passo a Passo Interativo: Seu Negócio Rodando em 5 Minutos
+        </h2>
+        <p class="mt-4 text-base text-slate-400">
+          Clique nas etapas abaixo para ver como o DocentePro simplifica cada etapa do seu trabalho, desde a captação de seguidores até o recebimento do PIX e correção de tarefas.
+        </p>
+      </div>
+
+      <!-- Step Navigator Tabs (Interactive) -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-5xl mx-auto mb-10" id="step-tabs">
+        
+        <button onclick="selectStep(1)" id="step-tab-1" class="p-4 rounded-2xl border text-left transition bg-indigo-600/20 border-indigo-500 text-white shadow-lg">
+          <div class="flex items-center justify-between mb-2">
+            <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-extrabold text-xs flex items-center justify-center">1</span>
+            <i class="fa-solid fa-qrcode text-emerald-400"></i>
+          </div>
+          <div class="font-bold text-sm">Perfil & PIX</div>
+          <div class="text-[11px] text-slate-400 mt-1">Configure suas redes e conta</div>
+        </button>
+
+        <button onclick="selectStep(2)" id="step-tab-2" class="p-4 rounded-2xl border text-left transition bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700">
+          <div class="flex items-center justify-between mb-2">
+            <span class="w-7 h-7 rounded-full bg-slate-800 text-slate-300 font-extrabold text-xs flex items-center justify-center">2</span>
+            <i class="fa-solid fa-sliders text-indigo-400"></i>
+          </div>
+          <div class="font-bold text-sm">Matérias & Preços</div>
+          <div class="text-[11px] text-slate-400 mt-1">Crie e edite seus planos</div>
+        </button>
+
+        <button onclick="selectStep(3)" id="step-tab-3" class="p-4 rounded-2xl border text-left transition bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700">
+          <div class="flex items-center justify-between mb-2">
+            <span class="w-7 h-7 rounded-full bg-slate-800 text-slate-300 font-extrabold text-xs flex items-center justify-center">3</span>
+            <i class="fa-brands fa-tiktok text-cyan-400"></i>
+          </div>
+          <div class="font-bold text-sm">Link da Bio</div>
+          <div class="text-[11px] text-slate-400 mt-1">Divulgue no TikTok e X</div>
+        </button>
+
+        <button onclick="selectStep(4)" id="step-tab-4" class="p-4 rounded-2xl border text-left transition bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700">
+          <div class="flex items-center justify-between mb-2">
+            <span class="w-7 h-7 rounded-full bg-slate-800 text-slate-300 font-extrabold text-xs flex items-center justify-center">4</span>
+            <i class="fa-solid fa-headphones text-purple-400"></i>
+          </div>
+          <div class="font-bold text-sm">Alunos & Tarefas</div>
+          <div class="text-[11px] text-slate-400 mt-1">WhatsApp e áudios</div>
+        </button>
+
+      </div>
+
+      <!-- Step Content Display Box (Dynamic) -->
+      <div class="max-w-5xl mx-auto bg-slate-950 rounded-3xl border border-slate-800 shadow-2xl overflow-hidden p-6 sm:p-10">
+        
+        <!-- STEP 1 CONTENT -->
+        <div id="step-content-1" class="block animate-fadeIn">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold mb-3">
+                <i class="fa-solid fa-lock"></i> 100% dos Ganhos das Aulas Vão para Você
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-white">
+                Passo 1: Cadastre suas Redes Sociais e sua Chave PIX Pessoal
+              </h3>
+              <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+                Você nunca mais precisará enviar chave PIX solta em conversa de WhatsApp ou pagar 8,99% de taxa em plataformas terceiras.
+              </p>
+              <ul class="mt-4 space-y-2.5 text-xs text-slate-300">
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                  <span>Coloque o link do seu <b>Twitter (X)</b>, <b>TikTok</b> e <b>Instagram</b>.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                  <span>Insira sua chave PIX pessoal (CPF, E-mail, Celular ou Aleatória).</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                  <span>O sistema gera na hora o <b>QR Code Banco Central Oficial</b> em nome da sua conta.</span>
+                </li>
+              </ul>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a href="/index.html?view=professor" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center gap-2">
+                  <i class="fa-solid fa-sliders"></i> Testar no Painel do Professor
+                </a>
+              </div>
+            </div>
+
+            <!-- Interactive Mock Card for Step 1 -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700/80 shadow-inner">
+              <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center justify-between">
+                <span>Simulador de Configuração</span>
+                <span class="text-emerald-400"><i class="fa-solid fa-circle text-[8px]"></i> Ativo</span>
+              </div>
+              <div class="space-y-3 text-xs">
+                <div>
+                  <label class="block text-slate-400 mb-1">Seu Twitter / X:</label>
+                  <div class="flex items-center bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white">
+                    <i class="fa-brands fa-x-twitter text-slate-400 mr-2"></i>
+                    <span>@professorexemplo</span>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-slate-400 mb-1">Seu TikTok:</label>
+                  <div class="flex items-center bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white">
+                    <i class="fa-brands fa-tiktok text-cyan-400 mr-2"></i>
+                    <span>@professorexemplo</span>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-slate-400 mb-1">Sua Chave PIX (Para receber dos alunos):</label>
+                  <div class="flex items-center bg-slate-950 border border-emerald-500/40 rounded-lg px-3 py-2 text-emerald-400 font-mono font-bold">
+                    <i class="fa-solid fa-key mr-2"></i>
+                    <span>professor.pix@gmail.com</span>
+                  </div>
+                </div>
+                <div class="p-3 bg-emerald-950/30 border border-emerald-500/30 rounded-xl text-emerald-300 text-[11px] flex items-center gap-2">
+                  <i class="fa-solid fa-shield-halved text-base"></i>
+                  <span>100% do valor de cada aula cai na sua conta bancária no mesmo segundo!</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 CONTENT -->
+        <div id="step-content-2" class="hidden animate-fadeIn">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-bold mb-3">
+                <i class="fa-solid fa-bolt"></i> Total Liberdade Pedagógica
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-white">
+                Passo 2: Defina e Ajuste suas Matérias e Valores a Qualquer Momento
+              </h3>
+              <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+                Você pode incluir ou retirar matérias, criar aulas avulsas, pacotes mensais, intensivos para o ENEM ou planos de conversação com 1 clique.
+              </p>
+              <ul class="mt-4 space-y-2.5 text-xs text-slate-300">
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-indigo-400"></i>
+                  <span>Alterne entre <b>Inglês, Espanhol, Redação ENEM, Matemática, Física</b> ou qualquer outra matéria.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-indigo-400"></i>
+                  <span>Você decide o preço: R$ 50/hora, R$ 250/mês, R$ 400 intensivo.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-indigo-400"></i>
+                  <span>Ative ou pause planos com 1 botão para controlar o número de vagas.</span>
+                </li>
+              </ul>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a href="/index.html?view=professor" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center gap-2">
+                  <i class="fa-solid fa-plus"></i> Experimentar Criação de Planos
+                </a>
+              </div>
+            </div>
+
+            <!-- Interactive Mock Card for Step 2 -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700/80 shadow-inner">
+              <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
+                Exemplos de Planos que você pode criar:
+              </div>
+              <div class="space-y-2.5 text-xs">
+                <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between">
+                  <div>
+                    <div class="font-bold text-white">Inglês Conversação Destravar</div>
+                    <div class="text-[11px] text-indigo-400">Inglês • 2x por semana</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="font-extrabold text-emerald-400">R$ 350,00</div>
+                    <div class="text-[10px] text-slate-500">mensal</div>
+                  </div>
+                </div>
+
+                <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between">
+                  <div>
+                    <div class="font-bold text-white">Redação ENEM Nota 1000</div>
+                    <div class="text-[11px] text-pink-400">Redação • Correções em PDF</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="font-extrabold text-emerald-400">R$ 280,00</div>
+                    <div class="text-[10px] text-slate-500">mensal</div>
+                  </div>
+                </div>
+
+                <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between">
+                  <div>
+                    <div class="font-bold text-white">Mentoria Individual Avulsa</div>
+                    <div class="text-[11px] text-cyan-400">Exatas / Dúvidas • 1 hora</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="font-extrabold text-emerald-400">R$ 90,00</div>
+                    <div class="text-[10px] text-slate-500">avulso</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 CONTENT -->
+        <div id="step-content-3" class="hidden animate-fadeIn">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-bold mb-3">
+                <i class="fa-solid fa-mobile-screen"></i> O Melhor Link da Bio do Mercado
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-white">
+                Passo 3: Coloque seu Link Inteligente na Bio do TikTok, X e Instagram
+              </h3>
+              <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+                Ao invés de um link comum que só tem botões estáticos, o seu Link da Bio DocentePro possui um <b>funil de triagem interativo</b>.
+              </p>
+              <ul class="mt-4 space-y-2.5 text-xs text-slate-300">
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                  <span>O aluno escolhe o plano, informa o nível atual e o melhor horário.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                  <span>O sistema gera o PIX Copia-e-Cola e QR Code dinâmico na hora.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                  <span>Elimina curiosos e entrega contatos qualificados diretamente no seu WhatsApp.</span>
+                </li>
+              </ul>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a href="/index.html?view=bio" class="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center gap-2">
+                  <i class="fa-solid fa-mobile-screen-button"></i> Ver Link da Bio Funcionando
+                </a>
+              </div>
+            </div>
+
+            <!-- Interactive Mock Card for Step 3 -->
+            <div class="bg-slate-900 p-5 rounded-3xl border border-slate-700/80 shadow-2xl max-w-sm mx-auto text-center">
+              <div class="w-16 h-16 rounded-full mx-auto p-1 bg-gradient-to-tr from-cyan-400 to-indigo-500 shadow mb-2">
+                <div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center text-2xl">👨‍🏫</div>
+              </div>
+              <h4 class="font-extrabold text-white text-base">Teacher Lucas</h4>
+              <p class="text-xs text-cyan-400">Inglês Real para Destravar</p>
+              
+              <div class="flex items-center justify-center gap-2 my-3">
+                <span class="px-2 py-0.5 rounded bg-black text-cyan-400 text-[10px] font-bold"><i class="fa-brands fa-tiktok"></i> TikTok</span>
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-white text-[10px] font-bold"><i class="fa-brands fa-x-twitter"></i> Twitter</span>
+                <span class="px-2 py-0.5 rounded bg-pink-950 text-pink-400 text-[10px] font-bold"><i class="fa-brands fa-instagram"></i> Insta</span>
+              </div>
+
+              <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-500/30 text-left text-xs mb-3">
+                <div class="font-bold text-indigo-300 flex items-center gap-1.5 mb-1">
+                  <i class="fa-solid fa-bolt text-yellow-400"></i> Triagem Rápida:
+                </div>
+                <div class="text-[11px] text-slate-300">Nome: Beatriz Lima • Horário: Noite</div>
+                <div class="text-[11px] text-emerald-400 font-bold mt-1">PIX R$ 350,00 Gerado com Sucesso!</div>
+              </div>
+              <div class="text-[10px] text-slate-400">Pronto para colocar na bio do seu perfil!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 CONTENT -->
+        <div id="step-content-4" class="hidden animate-fadeIn">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-xs font-bold mb-3">
+                <i class="fa-solid fa-graduation-cap"></i> Portal Exclusivo do Aluno
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-white">
+                Passo 4: Gerencie Alunos, Confirme Pagamentos e Corrija Exercícios
+              </h3>
+              <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+                Tudo centralizado em um só lugar. Chega de planilhas desorganizadas e arquivos de áudio perdidos no WhatsApp.
+              </p>
+              <ul class="mt-4 space-y-2.5 text-xs text-slate-300">
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-purple-400"></i>
+                  <span>Alunos gravam áudios de pronúncia diretamente pelo navegador.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-purple-400"></i>
+                  <span>Envio de redações e exercícios em PDF com controle de entrega.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-purple-400"></i>
+                  <span>Confirmação de pagamento no PIX com 1 clique e lembretes automáticos.</span>
+                </li>
+              </ul>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a href="/index.html?view=aluno" class="px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-xl shadow-lg transition flex items-center gap-2">
+                  <i class="fa-solid fa-user-graduate"></i> Ver Portal do Aluno
+                </a>
+              </div>
+            </div>
+
+            <!-- Interactive Mock Card for Step 4 -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700/80 shadow-inner">
+              <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center justify-between">
+                <span>Fila de Correção do Professor</span>
+                <span class="text-purple-400 font-bold">2 Pendentes</span>
+              </div>
+              <div class="space-y-3 text-xs">
+                <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-white">Áudio de Speaking: Desafio de Pronúncia</span>
+                    <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded">Aguardando Nota</span>
+                  </div>
+                  <div class="text-[11px] text-slate-400 mb-2">Aluno: Pedro Silva • Inglês Fluência</div>
+                  <div class="flex items-center gap-2 bg-slate-900 p-2 rounded-lg border border-slate-800">
+                    <i class="fa-solid fa-play text-indigo-400 cursor-pointer"></i>
+                    <div class="h-1.5 flex-1 bg-slate-800 rounded-full overflow-hidden">
+                      <div class="w-1/2 h-full bg-indigo-500"></div>
+                    </div>
+                    <span class="text-[10px] text-slate-400">0:45</span>
+                  </div>
+                </div>
+
+                <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-white">Redação ENEM: Modelo Dissertativo</span>
+                    <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded">PDF Enviado</span>
+                  </div>
+                  <div class="text-[11px] text-slate-400">Aluna: Juliana Rocha • Redação Nota 1000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 4. CALCULADORA INTERATIVA DE ECONOMIA      -->
+  <!-- ========================================== -->
+  <section id="calculadora" class="py-20 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-bold uppercase tracking-wider mb-3">
+          <i class="fa-solid fa-calculator"></i> Simulador Transparente
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          Quanto Você Economiza no DocentePro?
+        </h2>
+        <p class="mt-4 text-base text-slate-400">
+          Plataformas tradicionais cobram <b>8,99% + R$ 2,49 por venda</b> além de taxas de saque. Veja o dinheiro que você economiza recebendo 100% no seu PIX.
+        </p>
+      </div>
+
+      <div class="max-w-4xl mx-auto bg-slate-900/90 rounded-3xl border border-slate-800 p-6 sm:p-10 shadow-2xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          
+          <!-- Sliders -->
+          <div class="space-y-6">
+            <div>
+              <div class="flex items-center justify-between text-sm font-bold text-slate-300 mb-2">
+                <span>Quantos alunos particulares você tem?</span>
+                <span id="calc-students-display" class="text-lg font-black text-indigo-400">15 Alunos</span>
+              </div>
+              <input type="range" id="calc-students" min="3" max="50" value="15" step="1" oninput="updateCalculator()" class="w-full accent-indigo-500 h-2 bg-slate-950 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                <span>3 alunos</span>
+                <span>25 alunos</span>
+                <span>50 alunos</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between text-sm font-bold text-slate-300 mb-2">
+                <span>Mensalidade média de cada aluno:</span>
+                <span id="calc-fee-display" class="text-lg font-black text-emerald-400">R$ 250,00</span>
+              </div>
+              <input type="range" id="calc-fee" min="80" max="600" value="250" step="10" oninput="updateCalculator()" class="w-full accent-emerald-500 h-2 bg-slate-950 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                <span>R$ 80</span>
+                <span>R$ 300</span>
+                <span>R$ 600</span>
+              </div>
+            </div>
+
+            <div class="p-4 bg-slate-950/80 rounded-2xl border border-slate-800 text-xs text-slate-400 space-y-1">
+              <div class="flex justify-between">
+                <span>Seu Faturamento Bruto:</span>
+                <span id="calc-gross" class="font-bold text-white text-sm">R$ 3.750,00</span>
+              </div>
+              <div class="flex justify-between text-red-400">
+                <span>Perda em taxas de outras plataformas (8,99% + taxa):</span>
+                <span id="calc-loss" class="font-bold">- R$ 374,48/mês</span>
+              </div>
+              <div class="flex justify-between text-indigo-300">
+                <span>Custo Fixo DocentePro (Sem taxas por aluno):</span>
+                <span class="font-bold">R$ 39,90/mês</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Result Highlight Card -->
+          <div class="bg-gradient-to-br from-emerald-950/60 via-slate-950 to-indigo-950/60 p-6 sm:p-8 rounded-2xl border border-emerald-500/40 text-center shadow-xl">
+            <span class="text-xs uppercase font-extrabold text-emerald-400 tracking-wider">Economia Anual no seu Bolso</span>
+            <div id="calc-savings-year" class="text-4xl sm:text-5xl font-black text-emerald-400 mt-2 mb-2">
+              R$ 4.014,96
+            </div>
+            <p class="text-xs text-slate-300 mb-6">
+              Mais de 4 mil reais a mais no seu bolso por ano para usar como quiser. E o dinheiro das aulas cai no seu PIX na hora!
+            </p>
+            <a href="/index.html?view=professor" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-extrabold text-sm rounded-xl shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-gift"></i> Começar Meus 7 Dias Grátis
+            </a>
+            <div class="text-[11px] text-slate-500 mt-2">Sem taxa de adesão • Sem cartão de crédito no início</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 5. GRADE DE RECURSOS EXCLUSIVOS            -->
+  <!-- ========================================== -->
+  <section id="recursos" class="py-20 bg-slate-900/60 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+          Tudo o que um Professor Precisa em uma Só Ferramenta
+        </h2>
+        <p class="mt-4 text-sm sm:text-base text-slate-400">
+          Projetado especialmente para a rotina de quem cria conteúdo e dá aulas particulares.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Feature 1 -->
+        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 hover:border-indigo-500/50 transition shadow-lg group">
+          <div class="w-12 h-12 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+            <i class="fa-solid fa-qrcode"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2">100% no seu PIX Direto</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Seus alunos pagam através de QR Code oficial Banco Central e Copia-e-Cola. O dinheiro vai direto para a sua conta sem reter saldo.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition shadow-lg group">
+          <div class="w-12 h-12 rounded-xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+            <i class="fa-solid fa-filter"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2">Triagem Inteligente de Leads</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Formulário dinâmico que filtra curiosos e só entrega alunos realmente qualificados com nível, objetivo e horário de preferência.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 hover:border-emerald-500/50 transition shadow-lg group">
+          <div class="w-12 h-12 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+            <i class="fa-solid fa-sliders"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2">Matérias & Preços Livres</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Você é livre para dar aulas de qualquer disciplina: idiomas, redação, matemática, física ou mentorias. Altere os valores quando quiser.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 hover:border-purple-500/50 transition shadow-lg group">
+          <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+            <i class="fa-solid fa-microphone"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2">Gravador de Áudio Nativo</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Perfeito para professores de idiomas: o aluno grava o áudio no próprio navegador sem instalar apps e você avalia a pronúncia.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 hover:border-pink-500/50 transition shadow-lg group">
+          <div class="w-12 h-12 rounded-xl bg-pink-600/20 text-pink-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+            <i class="fa-solid fa-file-pdf"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2">Envio de PDFs e Redações</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Seus alunos de redação ENEM ou concursos anexam os textos para correção, e recebem feedback detalhado e notas no portal.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 hover:border-yellow-500/50 transition shadow-lg group">
+          <div class="w-12 h-12 rounded-xl bg-yellow-600/20 text-yellow-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+            <i class="fa-brands fa-x-twitter"></i>
+          </div>
+          <h3 class="font-bold text-lg text-white mb-2">Redes Sociais Conectadas</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Botões nativos para Twitter/X, TikTok, Instagram e WhatsApp destacados no topo do seu Link da Bio para crescer sua comunidade.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 6. PREÇO TRANSPARENTE: R$ 39,90/MÊS        -->
+  <!-- ========================================== -->
+  <section id="planos" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-bold uppercase tracking-wider mb-3">
+          <i class="fa-solid fa-tag"></i> Investimento Único
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          Um Preço Justo. Zero Comissão Sobre Suas Aulas.
+        </h2>
+        <p class="mt-4 text-base text-slate-400">
+          Você não precisa pagar fortunas de comissão para hospedar seu link e receber dos seus alunos.
+        </p>
+      </div>
+
+      <!-- Pricing Card -->
+      <div class="max-w-lg mx-auto bg-slate-900 rounded-3xl border-2 border-emerald-500 shadow-2xl p-8 relative overflow-hidden">
+        
+        <div class="absolute top-0 right-0 bg-emerald-500 text-slate-950 font-black text-[11px] uppercase tracking-wider px-4 py-1 rounded-bl-xl shadow">
+          7 Dias Grátis
+        </div>
+
+        <div class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Plano Docente Completo</div>
+        <h3 class="text-2xl font-black text-white mt-1">Acesso Ilimitado</h3>
+        
+        <div class="my-6 pb-6 border-b border-slate-800 flex items-baseline gap-2">
+          <span class="text-5xl font-black text-white">R$ 39,90</span>
+          <span class="text-slate-400 text-sm font-semibold">/mês após 7 dias</span>
+        </div>
+
+        <ul class="space-y-3.5 text-xs text-slate-300 mb-8">
+          <li class="flex items-center gap-2.5">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+            <span><b>7 Dias Grátis</b> para testar todos os recursos sem compromisso</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+            <span><b>Zero taxa percentual</b> sobre as suas aulas (100% no seu PIX)</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+            <span><b>Alunos ilimitados</b> e matérias ilimitadas</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+            <span>Link da Bio interativo de alta conversão para TikTok, X e Instagram</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+            <span>Portal do Aluno com gravação de áudio e upload de PDFs</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+            <span>Notificações diretas no WhatsApp e suporte prioritário</span>
+          </li>
+        </ul>
+
+        <a href="/index.html?view=professor" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-emerald-500/25 transition flex items-center justify-center gap-3">
+          <i class="fa-solid fa-bolt"></i>
+          <span>Começar Teste de 7 Dias Grátis</span>
+        </a>
+
+        <p class="text-center text-[11px] text-slate-500 mt-4">
+          Pagamento da mensalidade realizado via PIX oficial. Cancele quando quiser.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 7. PERGUNTAS FREQUENTES (FAQ)              -->
+  <!-- ========================================== -->
+  <section id="faq" class="py-20 bg-slate-900/60 border-t border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-white">Perguntas Frequentes</h2>
+        <p class="mt-2 text-sm text-slate-400">Tire todas as suas dúvidas sobre o DocentePro.</p>
+      </div>
+
+      <div class="space-y-4">
+        
+        <details class="bg-slate-950 p-5 rounded-2xl border border-slate-800 group">
+          <summary class="font-bold text-sm text-white cursor-pointer flex items-center justify-between">
+            <span>Como funciona o período de 7 dias grátis?</span>
+            <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-xs text-slate-300 leading-relaxed">
+            Você pode criar seu perfil, cadastrar suas matérias, configurar sua chave PIX e divulgar seu Link da Bio no TikTok e Twitter/X imediatamente. Você tem 7 dias completos para conhecer e faturar sem pagar nada. Após os 7 dias, para continuar usando a plataforma, você realiza o pagamento da mensalidade de R$ 39,90 via PIX.
+          </p>
+        </details>
+
+        <details class="bg-slate-950 p-5 rounded-2xl border border-slate-800 group">
+          <summary class="font-bold text-sm text-white cursor-pointer flex items-center justify-between">
+            <span>O dinheiro das aulas dos meus alunos passa pelo DocentePro?</span>
+            <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-xs text-slate-300 leading-relaxed">
+            <b>Não!</b> 100% do valor que o seu aluno paga vai direto para a sua chave PIX bancária (CPF, e-mail, celular ou chave aleatória). O DocentePro não cobra nenhuma comissão sobre as suas aulas particulares. Você só paga a assinatura fixa de R$ 39,90/mês pelo software.
+          </p>
+        </details>
+
+        <details class="bg-slate-950 p-5 rounded-2xl border border-slate-800 group">
+          <summary class="font-bold text-sm text-white cursor-pointer flex items-center justify-between">
+            <span>Onde eu coloco o link do meu Twitter (X), TikTok e Instagram?</span>
+            <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-xs text-slate-300 leading-relaxed">
+            No Painel do Professor, basta clicar no botão <b>[ ⚙️ Minha Chave PIX / Meu Perfil ]</b>. Lá você tem campos específicos para digitar seu usuário ou link do Twitter/X, TikTok, Instagram e WhatsApp. Eles aparecem como botões clicáveis no topo do seu Link da Bio!
+          </p>
+        </details>
+
+        <details class="bg-slate-950 p-5 rounded-2xl border border-slate-800 group">
+          <summary class="font-bold text-sm text-white cursor-pointer flex items-center justify-between">
+            <span>Posso tirar ou incluir novas matérias e alterar os preços?</span>
+            <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-xs text-slate-300 leading-relaxed">
+            <b>Sim, total liberdade!</b> No painel você tem a seção "Meus Planos, Preços e Matérias", onde você pode criar novos planos para qualquer matéria (Inglês, Redação, Espanhol, Exatas, etc.), mudar os preços a qualquer momento ou pausar/ativar planos com 1 clique.
+          </p>
+        </details>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 8. FOOTER COM CONFORMIDADE LEGAL (LGPD)   -->
+  <!-- ========================================== -->
+  <footer class="bg-slate-950 border-t border-slate-800 py-12 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <span class="font-bold text-white text-base">DocentePro</span>
+          <span class="text-slate-600">|</span>
+          <span>SaaS de Gestão e Triagem para Educadores</span>
+        </div>
+
+        <div class="flex items-center gap-6">
+          <a href="/termos" class="hover:text-white transition">Termos de Uso</a>
+          <a href="/privacidade" class="hover:text-white transition">Privacidade (LGPD)</a>
+          <a href="/index.html?view=professor" class="hover:text-indigo-400 transition">Painel do Professor</a>
+        </div>
+      </div>
+
+      <!-- Legal Advisories (Luciano SaaS Standard) -->
+      <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-800/80 text-[11px] text-slate-500 leading-relaxed space-y-2">
+        <p>
+          <b>Aviso Ético e Legal:</b> O DocentePro é uma plataforma SaaS de apoio administrativo, triagem comercial e organização pedagógica para professores autônomos. Softwares de produtividade não substituem orientação médica, psicológica ou jurídica.
+        </p>
+        <p>
+          <b>Faixa Etária Recomendada:</b> Plataforma recomendada para maiores de 13 anos. Contratações de planos e assinaturas financeiras devem ser realizadas por maiores de 18 anos ou assistidos por seus responsáveis legais, em estrita conformidade com o Código Civil e ECA.
+        </p>
+        <p>
+          <b>Privacidade & Proteção de Dados:</b> Em cumprimento à Lei Geral de Proteção de Dados (LGPD - Lei 13.709/2018), os dados fornecidos em triagens e cadastros são utilizados exclusivamente para viabilizar o contato pedagógico e a cobrança PIX.
+        </p>
+      </div>
+
+      <div class="text-center text-[11px] text-slate-600">
+        © 2026 DocentePro. Todos os direitos reservados.
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- 9. JAVASCRIPT INTERATIVO DA LANDING PAGE   -->
+  <!-- ========================================== -->
+  <script>
+    // Step switcher logic
+    function selectStep(stepNum) {
+      for (let i = 1; i <= 4; i++) {
+        const content = document.getElementById(`step-content-${i}`);
+        const tab = document.getElementById(`step-tab-${i}`);
+        if (i === stepNum) {
+          content.classList.remove('hidden');
+          content.classList.add('block');
+          tab.className = 'p-4 rounded-2xl border text-left transition bg-indigo-600/20 border-indigo-500 text-white shadow-lg';
+          tab.querySelector('span').className = 'w-7 h-7 rounded-full bg-indigo-600 text-white font-extrabold text-xs flex items-center justify-center';
+        } else {
+          content.classList.add('hidden');
+          content.classList.remove('block');
+          tab.className = 'p-4 rounded-2xl border text-left transition bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700';
+          tab.querySelector('span').className = 'w-7 h-7 rounded-full bg-slate-800 text-slate-300 font-extrabold text-xs flex items-center justify-center';
+        }
+      }
+    }
+
+    // Profit Calculator Logic
+    function updateCalculator() {
+      const students = parseInt(document.getElementById('calc-students').value, 10);
+      const fee = parseFloat(document.getElementById('calc-fee').value);
+
+      document.getElementById('calc-students-display').innerText = `${students} Alunos`;
+      document.getElementById('calc-fee-display').innerText = `R$ ${fee.toFixed(2)}`;
+
+      const gross = students * fee;
+      document.getElementById('calc-gross').innerText = `R$ ${gross.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+
+      // Outras plataformas: 8.99% + R$ 2.49 por venda + taxa de saque
+      const otherFees = (gross * 0.0899) + (students * 2.49) + 4.90;
+      document.getElementById('calc-loss').innerText = `- R$ ${otherFees.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}/mês`;
+
+      // Economia anual no DocentePro (Paga só R$ 39,90/mês)
+      const docenteProCost = 39.90;
+      const monthlySavings = otherFees - docenteProCost;
+      const yearlySavings = monthlySavings > 0 ? monthlySavings * 12 : 0;
+
+      document.getElementById('calc-savings-year').innerText = `R$ ${yearlySavings.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    }
+
+    // Auto-init calculator on load
+    updateCalculator();
+  </script>
+
+</body>
+</html>

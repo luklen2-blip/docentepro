@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocentePro - Painel Executivo Privado (Luciano)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans">
+
+  <!-- PIN Protection Screen -->
+  <div id="pin-lock-screen" class="fixed inset-0 bg-slate-950 z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl space-y-4">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div>
+        <h2 class="text-lg font-black text-white">Painel Exclusivo do Luciano</h2>
+        <p class="text-xs text-slate-400 mt-1">Área confidencial. Digite seu PIN master para acessar métricas e lucros.</p>
+      </div>
+      <form onsubmit="unlockAdmin(event)" class="space-y-3">
+        <input type="password" id="admin-pin" placeholder="PIN Master (Padrão: 2026)" autofocus class="w-full text-center tracking-widest text-lg font-mono bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-500">
+        <button type="submit" class="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow">
+          <i class="fa-solid fa-key"></i> Desbloquear Painel
+        </button>
+      </form>
+      <p id="pin-error" class="text-xs text-red-400 hidden">PIN incorreto. Tente novamente.</p>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-slate-900 border-b border-slate-800 p-4 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold">
+          <i class="fa-solid fa-crown"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-black text-white">DocentePro | Painel Master Privado</h1>
+          <p class="text-xs text-slate-400">Proprietário: Luciano | Chave PIX: <span id="header-pix-key" class="text-amber-400 font-mono">luklen2@gmail.com</span></p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="openSaasPixModal()" class="px-3 py-1.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500 hover:text-slate-950 text-xs font-bold rounded-lg transition flex items-center gap-1.5">
+          <i class="fa-solid fa-gear"></i> Alterar Minha Chave PIX
+        </button>
+        <a href="/" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 rounded-lg transition">
+          Ver Site Público &rarr;
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl w-full mx-auto p-4 sm:p-6 space-y-6 flex-1">
+    
+    <!-- Banner de MRR -->
+    <div class="bg-gradient-to-r from-amber-500/20 via-slate-900 to-slate-900 p-6 rounded-2xl border border-amber-500/30 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Receita Recorrente Líquida</span>
+        <div class="text-3xl font-black text-white mt-1" id="mrr-val">R$ 0,00 / mês</div>
+        <p class="text-xs text-slate-400 mt-1">Caindo 100% direto no seu PIX sem taxas de intermediários.</p>
+      </div>
+      <div class="bg-slate-950/80 px-4 py-3 rounded-xl border border-slate-800 text-right">
+        <div class="text-xs text-slate-400">Potencial com Testes Convertidos:</div>
+        <div class="text-xl font-bold text-emerald-400" id="potential-mrr">R$ 0,00 / mês</div>
+      </div>
+    </div>
+
+    <!-- Metrics Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+        <div class="text-xs text-slate-400 mb-1">Professores Cadastrados</div>
+        <div class="text-2xl font-black text-white" id="total-profs">0</div>
+        <div class="text-[11px] text-slate-400 mt-1" id="profs-detail">0 pagantes | 0 em teste</div>
+      </div>
+
+      <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+        <div class="text-xs text-slate-400 mb-1">Alunos Atendidos na Plataforma</div>
+        <div class="text-2xl font-black text-cyan-400" id="total-students">0</div>
+        <div class="text-[11px] text-slate-400 mt-1">Estudantes ativos</div>
+      </div>
+
+      <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+        <div class="text-xs text-slate-400 mb-1">Volume Financeiro dos Professores</div>
+        <div class="text-2xl font-black text-emerald-400" id="prof-volume">R$ 0,00</div>
+        <div class="text-[11px] text-slate-400 mt-1">Gerado pelos professores</div>
+      </div>
+
+      <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+        <div class="text-xs text-slate-400 mb-1">Custo de Servidor do Luciano</div>
+        <div class="text-2xl font-black text-slate-300">R$ 0,00</div>
+        <div class="text-[11px] text-emerald-400 mt-1">Margem de Lucro: 100%</div>
+      </div>
+    </div>
+
+    <!-- Tabela de Professores -->
+    <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-users-gear text-amber-400"></i> Gestão de Professores & Status de Assinatura
+        </h2>
+        <span class="text-xs text-slate-400">Mensalidade única: R$ 39,90/mês</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-950 text-slate-400 font-semibold border-b border-slate-800">
+            <tr>
+              <th class="p-3">Professor</th>
+              <th class="p-3">Matéria</th>
+              <th class="p-3">TikTok</th>
+              <th class="p-3">Twitter (X)</th>
+              <th class="p-3">Mensalidade p/ Luciano</th>
+              <th class="p-3">Status da Assinatura</th>
+            </tr>
+          </thead>
+          <tbody id="teachers-table-body" class="divide-y divide-slate-800">
+            <!-- Loaded via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Modal Chave PIX do Luciano -->
+  <div id="modal-saas-pix" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-amber-500/40 rounded-2xl max-w-md w-full p-6 shadow-2xl animate-scaleUp">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-crown text-amber-400"></i> Configurar Chave PIX do Luciano
+        </h3>
+        <button onclick="closeSaasPixModal()" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form id="saas-pix-form" onsubmit="saveSaasPix(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 font-medium mb-1">Sua Chave PIX (Onde cai os R$ 39,90):</label>
+          <input type="text" id="saas-pix-key" required placeholder="luklen2@gmail.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-500">
+        </div>
+
+        <div>
+          <label class="block text-slate-300 font-medium mb-1">Nome Completo do Titular (Como no Banco):</label>
+          <input type="text" id="saas-pix-name" required placeholder="LUCIANO SAAS" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-slate-300 font-medium mb-1">Cidade do Banco:</label>
+          <input type="text" id="saas-pix-city" required placeholder="SAO PAULO" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none">
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
+          <button type="button" onclick="closeSaasPixModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl">Cancelar</button>
+          <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow">Salvar Chave PIX</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const MASTER_PIN = '2026';
+
+    function unlockAdmin(e) {
+      e.preventDefault();
+      const input = document.getElementById('admin-pin').value;
+      if (input === MASTER_PIN) {
+        document.getElementById('pin-lock-screen').classList.add('hidden');
+        sessionStorage.setItem('docentepro_admin_auth', '1');
+        loadData();
+      } else {
+        document.getElementById('pin-error').classList.remove('hidden');
+      }
+    }
+
+    if (sessionStorage.getItem('docentepro_admin_auth') === '1') {
+      document.getElementById('pin-lock-screen').classList.add('hidden');
+      loadData();
+    }
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/saas/summary');
+        const data = await res.json();
+
+        document.getElementById('mrr-val').innerText = `R$ ${data.metrics.totalSaaSMrr.toFixed(2)} / mês`;
+        document.getElementById('potential-mrr').innerText = `R$ ${data.metrics.totalPotentialMrr.toFixed(2)} / mês`;
+        document.getElementById('total-profs').innerText = data.metrics.totalTeachers;
+        document.getElementById('profs-detail').innerText = `${data.metrics.payingTeachers || 1} pagantes | ${data.metrics.trialTeachers || 1} em 7 dias grátis`;
+        document.getElementById('total-students').innerText = data.metrics.totalStudents;
+        document.getElementById('prof-volume').innerText = `R$ ${data.metrics.totalTeachersVolume.toFixed(2)} / mês`;
+        document.getElementById('header-pix-key').innerText = data.saas.pixKey;
+
+        // Populate Table
+        const tbody = document.getElementById('teachers-table-body');
+        tbody.innerHTML = '';
+        (data.teachers || []).forEach(t => {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-800/40 transition';
+
+          let statusBadge = '';
+          if (t.saasStatus === 'trial') {
+            statusBadge = `<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold">🎁 7 Dias Grátis (Restam ${t.trialDaysRemaining || 4}d)</span>`;
+          } else if (t.saasStatus === 'expirado') {
+            statusBadge = `<span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30 text-[10px] font-bold">⚠️ Teste Expirado (Bloqueado)</span>`;
+          } else {
+            statusBadge = `<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold">🟢 Assinante Ativo (R$ 39,90)</span>`;
+          }
+
+          tr.innerHTML = `
+            <td class="p-3 font-bold text-white">${t.name}</td>
+            <td class="p-3">${t.subjectCategory}</td>
+            <td class="p-3 text-cyan-400 font-mono text-[11px]">${t.tiktokUser}</td>
+            <td class="p-3 text-slate-300 font-mono text-[11px]">${t.twitter || '-'}</td>
+            <td class="p-3 font-black text-amber-400">R$ ${t.saasFee.toFixed(2)} / mês</td>
+            <td class="p-3">${statusBadge}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+      } catch (err) {
+        console.error('Erro ao carregar admin:', err);
+      }
+    }
+
+    function openSaasPixModal() {
+      fetch('/api/saas/summary').then(r => r.json()).then(data => {
+        document.getElementById('saas-pix-key').value = data.saas.pixKey || 'luklen2@gmail.com';
+        document.getElementById('saas-pix-name').value = data.saas.pixName || 'LUCIANO SAAS';
+        document.getElementById('saas-pix-city').value = data.saas.pixCity || 'SAO PAULO';
+        document.getElementById('modal-saas-pix').classList.remove('hidden');
+      });
+    }
+
+    function closeSaasPixModal() {
+      document.getElementById('modal-saas-pix').classList.add('hidden');
+    }
+
+    async function saveSaasPix(e) {
+      e.preventDefault();
+      const payload = {
+        pixKey: document.getElementById('saas-pix-key').value,
+        pixName: document.getElementById('saas-pix-name').value,
+        pixCity: document.getElementById('saas-pix-city').value
+      };
+
+      try {
+        await fetch('/api/saas/config', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        alert('Sua Chave PIX pessoal foi atualizada com sucesso!');
+        closeSaasPixModal();
+        loadData();
+      } catch (err) {
+        alert('Erro ao salvar: ' + err.message);
+      }
+    }
+  </script>
+</body>
+</html>
