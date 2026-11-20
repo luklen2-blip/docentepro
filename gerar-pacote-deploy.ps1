@@ -1,4 +1,4 @@
-# Script de Geração de Pacote de Deploy Limpo na Área de Trabalho
+﻿# Script de Geração de Pacote de Deploy Limpo na Área de Trabalho
 $ErrorActionPreference = "Stop"
 
 $projectDir = $PSScriptRoot
@@ -34,6 +34,9 @@ $itemsToCopy = @(
     "termos.html",
     "privacidade.html",
     "index.html",
+    "landing.html",
+    "admin.html",
+    "tunnel_manager.js",
     "README.md",
     "INICIAR_DOCENTEPRO.bat",
     "public",
