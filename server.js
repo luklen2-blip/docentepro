@@ -94,7 +94,8 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(204, {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization, x-admin-pin",
+      "Access-Control-Allow-Headers":
+        "Content-Type, Authorization, x-admin-pin",
     });
     res.end();
     return;
@@ -141,12 +142,14 @@ const server = http.createServer(async (req, res) => {
     if (!verifyAdminAuth(req)) {
       if (authLimiter.isLimited(clientIp)) {
         sendJson(res, 429, {
-          error: "Muitas tentativas de autenticação inválidas. Aguarde 15 minutos.",
+          error:
+            "Muitas tentativas de autenticação inválidas. Aguarde 15 minutos.",
         });
         return;
       }
       sendJson(res, 401, {
-        error: "Não autorizado: PIN Master obrigatório para visualizar métricas confidenciais do proprietário.",
+        error:
+          "Não autorizado: PIN Master obrigatório para visualizar métricas confidenciais do proprietário.",
       });
       return;
     }
@@ -278,7 +281,8 @@ const server = http.createServer(async (req, res) => {
   if (pathname === "/api/saas/config" && method === "PUT") {
     if (!verifyAdminAuth(req)) {
       sendJson(res, 401, {
-        error: "Não autorizado: PIN Master obrigatório para alterar a Chave PIX do proprietário.",
+        error:
+          "Não autorizado: PIN Master obrigatório para alterar a Chave PIX do proprietário.",
       });
       return;
     }
@@ -636,6 +640,79 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // POST /api/students/batch -> Importação de múltiplos alunos existentes em lote
+  if (pathname === "/api/students/batch" && method === "POST") {
+    try {
+      const body = await parseBody(req);
+      const db = readDb();
+      const teacherId = body.teacherId || "prof_lucas";
+      const studentsList = Array.isArray(body.students) ? body.students : [];
+
+      if (studentsList.length === 0) {
+        sendJson(res, 400, { error: "Nenhum aluno informado para importação." });
+        return;
+      }
+
+      if (!db.students) db.students = [];
+
+      const createdStudents = [];
+      for (const item of studentsList) {
+        if (!item.name || !item.name.trim()) continue;
+        const newStud = {
+          id: "stud_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
+          teacherId: teacherId,
+          name: item.name.trim(),
+          email: item.email ? item.email.trim() : "",
+          whatsapp: item.whatsapp ? item.whatsapp.trim() : "",
+          planId: item.planId || "",
+          planName: item.planName || "Aula Particular",
+          subject: item.subject || "Geral",
+          monthlyFee: Math.max(0, Number(item.monthlyFee) || 300.0),
+          dayOfWeek: item.dayOfWeek || "A combinar",
+          timeSlot: item.timeSlot || "Flexível",
+          paymentStatus: item.paymentStatus || "pendente",
+          dueDate:
+            item.dueDate ||
+            new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+              .toISOString()
+              .slice(0, 10),
+          status: "ativo",
+          createdAt: new Date().toISOString(),
+        };
+        db.students.push(newStud);
+        createdStudents.push(newStud);
+      }
+
+      writeDb(db);
+      sendJson(res, 201, {
+        message: `${createdStudents.length} alunos importados com sucesso!`,
+        count: createdStudents.length,
+        students: createdStudents,
+      });
+    } catch (err) {
+      sendJson(res, 400, { error: err.message });
+    }
+    return;
+  }
+
+  // DELETE /api/students/:id -> Excluir aluno cadastrado
+  const studentDeleteMatch = pathname.match(
+    /^\/api\/students\/([a-zA-Z0-9_-]+)$/,
+  );
+  if (studentDeleteMatch && method === "DELETE") {
+    const studentId = studentDeleteMatch[1];
+    const db = readDb();
+    const index = (db.students || []).findIndex((s) => s.id === studentId);
+    if (index === -1) {
+      sendJson(res, 404, { error: "Aluno não encontrado" });
+      return;
+    }
+    db.students.splice(index, 1);
+    writeDb(db);
+    sendJson(res, 200, { message: "Aluno removido com sucesso!" });
+    return;
+  }
+
   // PUT /api/students/:id/payment -> Alternar status de pagamento PIX
   const studentPayMatch = pathname.match(
     /^\/api\/students\/([a-zA-Z0-9_-]+)\/payment$/,
@@ -821,7 +898,9 @@ const server = http.createServer(async (req, res) => {
   if (!isPathSafe(targetFile)) {
     applySecurityHeaders(res, req);
     res.writeHead(403, { "Content-Type": "text/plain; charset=utf-8" });
-    res.end("403 Acesso Negado - Arquivo protegido pelo firewall de cibersegurança do DocentePro");
+    res.end(
+      "403 Acesso Negado - Arquivo protegido pelo firewall de cibersegurança do DocentePro",
+    );
     return;
   }
 

@@ -1448,20 +1448,33 @@
             class="lg:col-span-2 bg-slate-800/90 rounded-2xl border border-slate-700 overflow-hidden shadow-xl"
           >
             <div
-              class="p-5 border-b border-slate-700 flex items-center justify-between"
+              class="p-5 border-b border-slate-700 flex flex-wrap items-center justify-between gap-3"
             >
-              <h2
-                class="text-base font-bold text-white flex items-center gap-2"
-              >
-                <i class="fa-solid fa-address-book text-emerald-400"></i> Alunos
-                Matriculados & Mensalidades
-              </h2>
-              <button
-                onclick="openNewStudentModal()"
-                class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1"
-              >
-                <i class="fa-solid fa-user-plus"></i> Matricular Aluno
-              </button>
+              <div>
+                <h2
+                  class="text-base font-bold text-white flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-address-book text-emerald-400"></i> Alunos
+                  Matriculados & Mensalidades
+                </h2>
+                <p class="text-[11px] text-slate-400">
+                  Gerencie seus alunos atuais, envie acessos via WhatsApp e controle o PIX.
+                </p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button
+                  onclick="openNewStudentModal('single')"
+                  class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow"
+                >
+                  <i class="fa-solid fa-user-plus"></i> Inserir Aluno
+                </button>
+                <button
+                  onclick="openNewStudentModal('batch')"
+                  class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-semibold rounded-xl transition flex items-center gap-1.5"
+                >
+                  <i class="fa-solid fa-file-import"></i> Importar em Lote
+                </button>
+              </div>
             </div>
 
             <div class="overflow-x-auto">
@@ -1862,6 +1875,229 @@
             </button>
           </div>
         </form>
+      </div>
+    </div>
+
+    <!-- MODAL: CADASTRAR OU IMPORTAR ALUNOS EXISTENTES -->
+    <div
+      id="modal-student"
+      class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-slate-800 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl animate-scaleUp"
+      >
+        <div class="flex items-center justify-between pb-3 border-b border-slate-700 mb-4">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-user-plus text-emerald-400"></i>
+            <span id="modal-student-title">Inserir Alunos no Aplicativo</span>
+          </h3>
+          <button onclick="closeStudentModal()" class="text-slate-400 hover:text-white">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <!-- Tabs inside modal -->
+        <div class="flex border-b border-slate-700 mb-4 text-xs font-bold">
+          <button
+            id="tab-btn-single"
+            onclick="switchStudentModalTab('single')"
+            class="px-4 py-2 border-b-2 border-emerald-500 text-emerald-400 transition"
+          >
+            <i class="fa-solid fa-user mr-1"></i> 1. Aluno Individual
+          </button>
+          <button
+            id="tab-btn-batch"
+            onclick="switchStudentModalTab('batch')"
+            class="px-4 py-2 border-b-2 border-transparent text-slate-400 hover:text-white transition"
+          >
+            <i class="fa-solid fa-list-check mr-1"></i> 2. Importar Vários (Lote)
+          </button>
+          <button
+            id="tab-btn-invite"
+            onclick="switchStudentModalTab('invite')"
+            class="px-4 py-2 border-b-2 border-transparent text-slate-400 hover:text-white transition"
+          >
+            <i class="fa-solid fa-share-nodes mr-1"></i> 3. Link de Convite
+          </button>
+        </div>
+
+        <!-- TAB 1: Cadastrar Aluno Individual -->
+        <form id="student-single-form" onsubmit="saveSingleStudent(event)" class="space-y-3 text-xs block">
+          <div>
+            <label class="block text-slate-300 font-medium mb-1">Nome Completo do Aluno:</label>
+            <input
+              type="text"
+              id="student-name"
+              required
+              placeholder="Ex: Beatriz Lima"
+              class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 font-medium mb-1">WhatsApp / Celular:</label>
+              <input
+                type="text"
+                id="student-whatsapp"
+                required
+                placeholder="(11) 98765-4321"
+                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500"
+              />
+            </div>
+            <div>
+              <label class="block text-slate-300 font-medium mb-1">E-mail (Opcional):</label>
+              <input
+                type="email"
+                id="student-email"
+                placeholder="aluno@email.com"
+                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 font-medium mb-1">Matéria / Plano:</label>
+              <select
+                id="student-plan-select"
+                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none"
+              >
+                <!-- Populated dynamically via JS -->
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 font-medium mb-1">Valor da Mensalidade (R$):</label>
+              <input
+                type="number"
+                step="0.01"
+                id="student-fee"
+                required
+                placeholder="350.00"
+                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none font-mono text-emerald-400 font-bold"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 font-medium mb-1">Dia da Aula:</label>
+              <select
+                id="student-day"
+                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none"
+              >
+                <option value="Segunda-feira">Segunda-feira</option>
+                <option value="Terça-feira">Terça-feira</option>
+                <option value="Quarta-feira">Quarta-feira</option>
+                <option value="Quinta-feira">Quinta-feira</option>
+                <option value="Sexta-feira">Sexta-feira</option>
+                <option value="Sábado">Sábado</option>
+                <option value="Flexível">Horário Flexível</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 font-medium mb-1">Horário da Aula:</label>
+              <input
+                type="text"
+                id="student-time"
+                placeholder="Ex: 19:00 ou 15:30"
+                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div class="p-3 bg-emerald-950/40 rounded-xl border border-emerald-500/30 flex items-center gap-2 text-[11px] text-emerald-300">
+            <i class="fa-solid fa-wand-magic-sparkles text-emerald-400 text-sm"></i>
+            <span>Ao cadastrar, o portal exclusivo do aluno é criado na hora com fatura PIX e link da sua sala Meet!</span>
+          </div>
+
+          <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-700">
+            <button
+              type="button"
+              onclick="closeStudentModal()"
+              class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow flex items-center gap-1.5"
+            >
+              <i class="fa-solid fa-check"></i> Cadastrar Aluno
+            </button>
+          </div>
+        </form>
+
+        <!-- TAB 2: Importar Alunos em Lote -->
+        <form id="student-batch-form" onsubmit="saveBatchStudents(event)" class="space-y-3 text-xs hidden">
+          <div>
+            <label class="block text-slate-300 font-medium mb-1">
+              Cole sua lista de alunos (um por linha):
+            </label>
+            <p class="text-[11px] text-slate-400 mb-2">
+              Formato simples: <code>Nome, WhatsApp, Valor, Horário</code>
+            </p>
+            <textarea
+              id="student-batch-text"
+              rows="6"
+              required
+              placeholder="Beatriz Lima, 11987654321, 350, Terça 19h&#10;Carlos Eduardo, 21976543210, 400, Quinta 18h&#10;Mariana Souza, 31998887777, 300, Segunda 15h"
+              class="w-full font-mono bg-slate-950 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-emerald-500"
+            ></textarea>
+          </div>
+
+          <div class="p-3 bg-slate-900 rounded-xl border border-slate-700 text-[11px] text-slate-300 space-y-1">
+            <div class="font-bold text-white flex items-center gap-1.5">
+              <i class="fa-solid fa-lightbulb text-amber-400"></i> Dica de Migração:
+            </div>
+            <p>Você pode copiar sua lista do WhatsApp, Excel ou Bloco de Notas e colar aqui. O sistema criará todos os acessos automaticamente!</p>
+          </div>
+
+          <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-700">
+            <button
+              type="button"
+              onclick="closeStudentModal()"
+              class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow flex items-center gap-1.5"
+            >
+              <i class="fa-solid fa-file-import"></i> Importar Todos os Alunos
+            </button>
+          </div>
+        </form>
+
+        <!-- TAB 3: Link de Convite e Auto-Cadastro -->
+        <div id="student-invite-box" class="space-y-4 text-xs hidden">
+          <div class="p-4 bg-slate-900/90 rounded-xl border border-slate-700 space-y-2">
+            <span class="font-bold text-indigo-300 block">Envie o Link para Seus Alunos se Auto-Cadastrarem:</span>
+            <p class="text-slate-400 text-[11px]">
+              Se preferir que os próprios alunos preencham seus horários e planos, compartilhe o link de triagem da sua Bio:
+            </p>
+            <div class="flex items-center gap-2">
+              <input
+                type="text"
+                id="invite-link-input"
+                readonly
+                class="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white font-mono text-[11px]"
+              />
+              <button
+                onclick="copyInviteLink()"
+                class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition"
+              >
+                Copiar
+              </button>
+            </div>
+          </div>
+
+          <div class="p-3 bg-emerald-950/40 rounded-xl border border-emerald-500/30 text-[11px] text-emerald-300">
+            <i class="fa-brands fa-whatsapp text-emerald-400 mr-1"></i>
+            Assim que o aluno preencher, ele cai automaticamente na sua lista com status pendente de PIX para a primeira aula!
+          </div>
+        </div>
       </div>
     </div>
 
@@ -2620,23 +2856,49 @@
             const tr = document.createElement("tr");
             tr.className = "hover:bg-slate-800/40 transition";
             const isPago = s.paymentStatus === "pago";
+            const accessLink = `${window.location.origin}/?view=aluno&studentId=${s.id}`;
+            const cleanPhone = (s.whatsapp || "").replace(/\D/g, "");
+            const waMsg = encodeURIComponent(
+              `Olá ${s.name}! Aqui é o Prof. ${t.name}. Preparei nosso portal de aulas no DocentePro: por lá você acessa nossa sala do Meet com 1 clique, envia tarefas de áudio e vê o status do PIX mensal. Segue seu link de acesso exclusivo: ${accessLink}`
+            );
+            const waUrl = cleanPhone ? `https://wa.me/55${cleanPhone}?text=${waMsg}` : `https://wa.me/?text=${waMsg}`;
+
             tr.innerHTML = `
             <td class="p-3">
-              <div class="font-bold text-white">${s.name}</div>
-              <div class="text-[11px] text-slate-400">${s.whatsapp}</div>
+              <div class="font-bold text-white flex items-center gap-1.5">
+                ${s.name}
+              </div>
+              <div class="text-[11px] text-slate-400 flex items-center gap-1">
+                <i class="fa-brands fa-whatsapp text-emerald-400"></i> ${s.whatsapp || 'Sem celular'}
+              </div>
             </td>
-            <td class="p-3">${s.planName}</td>
-            <td class="p-3 font-semibold text-emerald-400">R$ ${s.monthlyFee.toFixed(2)}</td>
-            <td class="p-3">${s.dayOfWeek} ${s.timeSlot}</td>
+            <td class="p-3">
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-slate-200 text-[11px]">
+                ${s.planName || 'Aula Particular'}
+              </span>
+            </td>
+            <td class="p-3 font-semibold text-emerald-400">R$ ${(s.monthlyFee || 0).toFixed(2)}</td>
+            <td class="p-3 text-slate-300">${s.dayOfWeek || 'A definir'} ${s.timeSlot || ''}</td>
             <td class="p-3">
               <button onclick="toggleStudentPayment('${s.id}')" class="px-2 py-0.5 rounded text-[11px] font-bold ${isPago ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-amber-500/20 text-amber-400 border border-amber-500/30"}">
                 ${isPago ? "✅ Pago" : "⏳ Cobrar PIX"}
               </button>
             </td>
             <td class="p-3 text-right">
-              <a href="${t.meetLinkDefault}" target="_blank" class="px-2.5 py-1 bg-indigo-600/80 hover:bg-indigo-600 text-white rounded text-[11px] font-semibold">
-                Iniciar Aula
-              </a>
+              <div class="flex items-center justify-end gap-1.5">
+                <a href="${waUrl}" target="_blank" title="Enviar Link de Acesso via WhatsApp" class="px-2 py-1 bg-emerald-600/30 hover:bg-emerald-600 text-emerald-300 hover:text-white rounded text-[11px] font-semibold border border-emerald-500/30 transition flex items-center gap-1">
+                  <i class="fa-brands fa-whatsapp"></i> Acesso
+                </a>
+                <a href="${t.meetLinkDefault || '#'}" target="_blank" title="Iniciar Aula Meet/Zoom" class="px-2 py-1 bg-indigo-600/80 hover:bg-indigo-600 text-white rounded text-[11px] font-semibold transition flex items-center gap-1">
+                  <i class="fa-solid fa-video"></i> Aula
+                </a>
+                <button onclick="copyStudentPortalLink('${s.id}')" title="Copiar Link do Aluno" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-[11px] transition">
+                  <i class="fa-solid fa-link"></i>
+                </button>
+                <button onclick="deleteStudent('${s.id}')" title="Remover Aluno" class="px-1.5 py-1 text-slate-500 hover:text-red-400 rounded transition">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
             </td>
           `;
             studentsTbody.appendChild(tr);
@@ -2726,6 +2988,203 @@
 
       function closePlanModal() {
         document.getElementById("modal-plan").classList.add("hidden");
+      }
+
+      // ==========================================
+      // GERENCIAMENTO DE ALUNOS EXISTENTES (NOVO)
+      // ==========================================
+      function openNewStudentModal(initialTab = 'single') {
+        const modal = document.getElementById("modal-student");
+        if (!modal) return;
+
+        // Populate plans in the select
+        const planSelect = document.getElementById("student-plan-select");
+        if (planSelect && appData.currentTeacher) {
+          planSelect.innerHTML = "";
+          (appData.currentTeacher.plans || []).forEach(p => {
+            const opt = document.createElement("option");
+            opt.value = p.id;
+            opt.textContent = `${p.name} - R$ ${p.price.toFixed(2)}`;
+            opt.dataset.price = p.price;
+            opt.dataset.name = p.name;
+            opt.dataset.subject = p.subject;
+            planSelect.appendChild(opt);
+          });
+          // On change, update fee
+          planSelect.onchange = () => {
+            const selected = planSelect.options[planSelect.selectedIndex];
+            if (selected && selected.dataset.price) {
+              document.getElementById("student-fee").value = selected.dataset.price;
+            }
+          };
+          if (planSelect.options.length > 0) {
+            document.getElementById("student-fee").value = planSelect.options[0].dataset.price || 350;
+          }
+        }
+
+        // Setup invite link
+        const inviteInput = document.getElementById("invite-link-input");
+        if (inviteInput && appData.currentTeacher) {
+          inviteInput.value = `${window.location.origin}/?view=bio&teacher=${appData.currentTeacher.slug || appData.currentTeacher.id}`;
+        }
+
+        switchStudentModalTab(initialTab);
+        modal.classList.remove("hidden");
+      }
+
+      function closeStudentModal() {
+        const modal = document.getElementById("modal-student");
+        if (modal) modal.classList.add("hidden");
+      }
+
+      function switchStudentModalTab(tabName) {
+        const singleForm = document.getElementById("student-single-form");
+        const batchForm = document.getElementById("student-batch-form");
+        const inviteBox = document.getElementById("student-invite-box");
+        const btnSingle = document.getElementById("tab-btn-single");
+        const btnBatch = document.getElementById("tab-btn-batch");
+        const btnInvite = document.getElementById("tab-btn-invite");
+
+        if (singleForm) singleForm.classList.add("hidden");
+        if (batchForm) batchForm.classList.add("hidden");
+        if (inviteBox) inviteBox.classList.add("hidden");
+
+        [btnSingle, btnBatch, btnInvite].forEach(b => {
+          if (b) {
+            b.className = "px-4 py-2 border-b-2 border-transparent text-slate-400 hover:text-white transition";
+          }
+        });
+
+        if (tabName === "single") {
+          if (singleForm) singleForm.classList.remove("hidden");
+          if (btnSingle) btnSingle.className = "px-4 py-2 border-b-2 border-emerald-500 text-emerald-400 transition";
+        } else if (tabName === "batch") {
+          if (batchForm) batchForm.classList.remove("hidden");
+          if (btnBatch) btnBatch.className = "px-4 py-2 border-b-2 border-emerald-500 text-emerald-400 transition";
+        } else if (tabName === "invite") {
+          if (inviteBox) inviteBox.classList.remove("hidden");
+          if (btnInvite) btnInvite.className = "px-4 py-2 border-b-2 border-emerald-500 text-emerald-400 transition";
+        }
+      }
+
+      async function saveSingleStudent(e) {
+        e.preventDefault();
+        if (!appData.currentTeacher) return;
+
+        const planSelect = document.getElementById("student-plan-select");
+        const selectedOpt = planSelect ? planSelect.options[planSelect.selectedIndex] : null;
+
+        const payload = {
+          teacherId: appData.currentTeacher.id,
+          name: document.getElementById("student-name").value.trim(),
+          whatsapp: document.getElementById("student-whatsapp").value.trim(),
+          email: document.getElementById("student-email").value.trim(),
+          planId: selectedOpt ? selectedOpt.value : "",
+          planName: selectedOpt ? selectedOpt.dataset.name : "Aula Particular",
+          subject: selectedOpt ? selectedOpt.dataset.subject : "Geral",
+          monthlyFee: Number(document.getElementById("student-fee").value) || 350.0,
+          dayOfWeek: document.getElementById("student-day").value,
+          timeSlot: document.getElementById("student-time").value.trim() || "19:00"
+        };
+
+        try {
+          const res = await fetch("/api/students", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          if (res.ok) {
+            alert(`Aluno ${payload.name} cadastrado com sucesso!`);
+            closeStudentModal();
+            const sel = document.getElementById("prof-select");
+            loadProfessorView(sel.value);
+          } else {
+            alert("Erro: " + data.error);
+          }
+        } catch (err) {
+          alert("Erro ao cadastrar aluno: " + err.message);
+        }
+      }
+
+      async function saveBatchStudents(e) {
+        e.preventDefault();
+        if (!appData.currentTeacher) return;
+
+        const text = document.getElementById("student-batch-text").value.trim();
+        if (!text) return;
+
+        // Formato esperado por linha: Nome, WhatsApp, Valor, Horário
+        const lines = text.split("\n").filter(l => l.trim().length > 0);
+        const students = lines.map(line => {
+          const parts = line.split(",").map(p => p.trim());
+          const name = parts[0] || "Aluno";
+          const whatsapp = parts[1] || "";
+          const feeStr = parts[2] ? parts[2].replace(/[^\d.,]/g, "").replace(",", ".") : "350.0";
+          const monthlyFee = parseFloat(feeStr);
+          const schedule = parts[3] || "A combinar";
+          return {
+            name,
+            whatsapp,
+            monthlyFee: isNaN(monthlyFee) ? 350.0 : monthlyFee,
+            dayOfWeek: schedule,
+            timeSlot: "",
+            planName: "Aula Particular Regular",
+            subject: appData.currentTeacher.subjectCategory || "Geral"
+          };
+        });
+
+        try {
+          const res = await fetch("/api/students/batch", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              teacherId: appData.currentTeacher.id,
+              students
+            })
+          });
+          const data = await res.json();
+          if (res.ok) {
+            alert(`🎉 ${data.count || students.length} alunos importados com sucesso!`);
+            closeStudentModal();
+            const sel = document.getElementById("prof-select");
+            loadProfessorView(sel.value);
+          } else {
+            alert("Erro na importação: " + data.error);
+          }
+        } catch (err) {
+          alert("Erro ao importar alunos: " + err.message);
+        }
+      }
+
+      function copyInviteLink() {
+        const input = document.getElementById("invite-link-input");
+        if (input) {
+          input.select();
+          navigator.clipboard.writeText(input.value);
+          alert("Link de auto-cadastro copiado! Envie no WhatsApp dos seus alunos.");
+        }
+      }
+
+      function copyStudentPortalLink(studentId) {
+        const link = `${window.location.origin}/?view=aluno&studentId=${studentId}`;
+        navigator.clipboard.writeText(link);
+        alert("Link exclusivo do portal do aluno copiado!");
+      }
+
+      async function deleteStudent(studentId) {
+        if (!confirm("Tem certeza que deseja remover este aluno?")) return;
+        try {
+          const res = await fetch(`/api/students/${studentId}`, { method: "DELETE" });
+          if (res.ok) {
+            const sel = document.getElementById("prof-select");
+            loadProfessorView(sel.value);
+          } else {
+            alert("Não foi possível remover o aluno.");
+          }
+        } catch (err) {
+          alert("Erro: " + err.message);
+        }
       }
 
       function editPlan(planId) {

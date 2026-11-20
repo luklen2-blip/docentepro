@@ -1,4 +1,4 @@
-﻿# Script de Geração de Pacote de Deploy Limpo na Área de Trabalho
+# Script de Geração de Pacote de Deploy Limpo na Área de Trabalho
 $ErrorActionPreference = "Stop"
 
 $projectDir = $PSScriptRoot

@@ -83,7 +83,7 @@
           "active": true
         }
       ],
-      "subscriptionPaidDate": "2026-11-20T17:16:18.815Z"
+      "subscriptionPaidDate": "2026-11-20T18:00:08.037Z"
     },
     {
       "id": "prof_camila",
@@ -225,6 +225,40 @@
       "dueDate": "2026-11-28",
       "lastPaymentDate": "2026-10-28",
       "status": "ativo"
+    },
+    {
+      "id": "stud_1795197608050_mki6",
+      "teacherId": "prof_lucas",
+      "name": "Aluno Lote 1",
+      "email": "",
+      "whatsapp": "11911112222",
+      "planId": "",
+      "planName": "Aula Particular",
+      "subject": "Geral",
+      "monthlyFee": 350,
+      "dayOfWeek": "A combinar",
+      "timeSlot": "Flexível",
+      "paymentStatus": "pendente",
+      "dueDate": "2026-11-25",
+      "status": "ativo",
+      "createdAt": "2026-11-20T18:00:08.050Z"
+    },
+    {
+      "id": "stud_1795197608050_qfps",
+      "teacherId": "prof_lucas",
+      "name": "Aluno Lote 2",
+      "email": "",
+      "whatsapp": "11933334444",
+      "planId": "",
+      "planName": "Aula Particular",
+      "subject": "Geral",
+      "monthlyFee": 380,
+      "dayOfWeek": "A combinar",
+      "timeSlot": "Flexível",
+      "paymentStatus": "pendente",
+      "dueDate": "2026-11-25",
+      "status": "ativo",
+      "createdAt": "2026-11-20T18:00:08.050Z"
     }
   ],
   "tasks": [
@@ -272,6 +306,34 @@
     }
   ],
   "leads": [
+    {
+      "id": "lead_1795197609021",
+      "teacherId": "prof_lucas",
+      "name": "Aluno Silva",
+      "whatsapp": "1199998888",
+      "level": "Não informado",
+      "goal": "Geral",
+      "preferredTime": "Flexível",
+      "planChosen": "A definir",
+      "value": 0,
+      "origin": "TikTok",
+      "status": "novo",
+      "createdAt": "2026-11-20T18:00:09.021Z"
+    },
+    {
+      "id": "lead_1795197608025",
+      "teacherId": "prof_lucas",
+      "name": "Aluno Teste TikTok",
+      "whatsapp": "(11) 99999-8888",
+      "level": "Iniciante",
+      "goal": "Geral",
+      "preferredTime": "Noite",
+      "planChosen": "Inglês Viagem",
+      "value": 380,
+      "origin": "TikTok @teacherlucas.ingles",
+      "status": "novo",
+      "createdAt": "2026-11-20T18:00:08.025Z"
+    },
     {
       "id": "lead_1795194979765",
       "teacherId": "prof_lucas",
