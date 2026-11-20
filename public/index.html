@@ -1468,9 +1468,9 @@
             id="aluno-meet-btn"
             href="#"
             target="_blank"
-            class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-indigo-600/30 transition flex items-center gap-2"
+            class="px-5 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-lg shadow-indigo-600/30 transition flex items-center gap-2.5"
           >
-            <i class="fa-solid fa-video"></i> Entrar na Sala Meet / Zoom
+            <i class="fa-solid fa-video text-emerald-400"></i> <span id="aluno-meet-text">Entrar na Sala Meet / Zoom / Teams</span>
           </a>
         </div>
 
@@ -1965,15 +1965,18 @@
             </div>
 
             <div>
-              <label class="block text-slate-300 font-medium mb-1"
-                >Link da Sala (Google Meet ou Zoom):</label
-              >
+              <label class="block text-slate-300 font-medium mb-1">
+                <i class="fa-solid fa-video text-indigo-400 mr-1"></i> Link da Sala de Aula ao Vivo (Google Meet, Zoom, Teams ou Discord):
+              </label>
               <input
                 type="url"
                 id="prof-meet-link"
-                placeholder="https://meet.google.com/xyz-abc"
-                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-white focus:outline-none"
+                placeholder="https://meet.google.com/xyz-abc ou https://zoom.us/j/... ou Teams"
+                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-indigo-500"
               />
+              <p class="text-[11px] text-slate-400 mt-1">
+                Cole o link permanente da sala onde você dá suas aulas particulares (<b>Google Meet</b>, <b>Zoom</b>, <b>Microsoft Teams</b>, <b>Whereby</b> ou <b>Discord</b>). Seu aluno entra com 1 clique pelo portal!
+              </p>
             </div>
           </div>
 
@@ -2805,8 +2808,24 @@
             `${s.dayOfWeek} às ${s.timeSlot}`;
           document.getElementById("aluno-teacher-name").innerText =
             `Com ${data.teacher.name}`;
-          document.getElementById("aluno-meet-btn").href =
-            data.teacher.meetLink;
+          const meetBtn = document.getElementById("aluno-meet-btn");
+          const meetText = document.getElementById("aluno-meet-text");
+          const meetLink = data.teacher.meetLink || "https://meet.google.com";
+          meetBtn.href = meetLink;
+          const urlLower = meetLink.toLowerCase();
+          if (meetText) {
+            if (urlLower.includes("meet.google")) {
+              meetText.innerText = "Entrar no Google Meet da Aula";
+            } else if (urlLower.includes("zoom.us")) {
+              meetText.innerText = "Entrar no Zoom da Aula";
+            } else if (urlLower.includes("teams.microsoft") || urlLower.includes("teams.live")) {
+              meetText.innerText = "Entrar no Microsoft Teams da Aula";
+            } else if (urlLower.includes("discord")) {
+              meetText.innerText = "Entrar no Discord da Aula";
+            } else {
+              meetText.innerText = "Entrar na Sala da Aula ao Vivo";
+            }
+          }
 
           // PIX & Status
           const isPago = s.paymentStatus === "pago";
