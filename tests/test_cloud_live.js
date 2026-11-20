@@ -60,8 +60,10 @@ async function runLiveSuite() {
     console.log('✅ 2. Landing Page (/ e /landing) e Painel Privado /admin operacionais');
     console.log('✅ 2. Frontend e Interface carregados com sucesso');
 
-    // 3. SaaS Metrics & Teachers
-    const saas = await requestLive('/api/saas/summary');
+    // 3. SaaS Metrics & Teachers (Autenticado com PIN Master)
+    const saas = await requestLive('/api/saas/summary', {
+      headers: { 'x-admin-pin': '2026' }
+    });
     assert.strictEqual(saas.status, 200, 'Falha ao obter dados do SaaS');
     assert.ok(saas.data.metrics.totalSaaSMrr > 0, 'Faturamento do Luciano presente');
     console.log(`✅ 3. Motor SaaS ativo: R$ ${saas.data.metrics.totalSaaSMrr.toFixed(2)} MRR`);

@@ -1,4 +1,4 @@
-# Script de Geração de Pacote de Deploy Limpo na Área de Trabalho
+﻿# Script de Geração de Pacote de Deploy Limpo na Área de Trabalho
 $ErrorActionPreference = "Stop"
 
 $projectDir = $PSScriptRoot
@@ -24,6 +24,7 @@ New-Item -ItemType Directory -Path $tempStaging | Out-Null
 $itemsToCopy = @(
     "package.json",
     "server.js",
+    "security.js",
     "db.js",
     "pix_utils.js",
     "banco_docentepro.json",

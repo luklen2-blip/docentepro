@@ -99,9 +99,20 @@ async function runServerTests() {
     assert.ok(res.uptime_seconds >= 0, 'Uptime ausente');
   });
 
-  // Teste GET /api/saas/summary
-  await runAsyncTest('API: Resumo SaaS do Luciano retorna MRR e contagem correta', async () => {
-    const res = await fetchJson(`http://localhost:${PORT}/api/saas/summary`);
+  // Teste GET /api/saas/summary (Autenticado com PIN Master)
+  await runAsyncTest('API: Resumo SaaS do Luciano protegido por PIN retorna MRR e contagem correta', async () => {
+    // 1. Sem PIN deve retornar 401 Unauthorized
+    try {
+      await fetchJson(`http://localhost:${PORT}/api/saas/summary`);
+      assert.fail('Deveria ter bloqueado requisição sem PIN');
+    } catch (err) {
+      assert.ok(err.message.includes('401'), 'Deveria retornar 401');
+    }
+
+    // 2. Com PIN correto deve retornar 200
+    const res = await fetchJson(`http://localhost:${PORT}/api/saas/summary`, {
+      headers: { 'x-admin-pin': '2026' }
+    });
     assert.ok(res.metrics.totalSaaSMrr > 0, 'MRR do Luciano deve ser maior que zero');
     assert.ok(res.metrics.totalTeachers >= 2, 'Número de professores inválido');
   });
@@ -191,9 +202,20 @@ async function runServerTests() {
     });
     assert.strictEqual(profPixRes.teacher.pixKey, '11988887777', 'Chave PIX do professor não atualizada');
 
-    // 2. Atualizar chave do Luciano
+    // 2. Atualizar chave do Luciano (sem PIN deve falhar, com PIN deve aprovar)
+    try {
+      await fetchJson(`http://localhost:${PORT}/api/saas/config`, {
+        method: 'PUT',
+        body: JSON.stringify({ pixKey: 'hacker@evil.com' })
+      });
+      assert.fail('Deveria ter bloqueado alteração de PIX sem PIN');
+    } catch (err) {
+      assert.ok(err.message.includes('401'), 'Deveria retornar 401');
+    }
+
     const saasPixRes = await fetchJson(`http://localhost:${PORT}/api/saas/config`, {
       method: 'PUT',
+      headers: { 'x-admin-pin': '2026' },
       body: JSON.stringify({
         pixKey: 'luciano.pessoal@pix.com.br',
         pixName: 'LUCIANO SILVA'
@@ -233,6 +255,9 @@ function fetchJson(urlStr, options = {}) {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
+        if (res.statusCode >= 400) {
+          return reject(new Error('HTTP ' + res.statusCode + ': ' + data));
+        }
         try {
           resolve(JSON.parse(data));
         } catch (e) {

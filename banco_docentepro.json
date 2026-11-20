@@ -83,7 +83,7 @@
           "active": true
         }
       ],
-      "subscriptionPaidDate": "2026-11-20T16:36:15.643Z"
+      "subscriptionPaidDate": "2026-11-20T17:16:18.815Z"
     },
     {
       "id": "prof_camila",
@@ -272,6 +272,76 @@
     }
   ],
   "leads": [
+    {
+      "id": "lead_1795194979765",
+      "teacherId": "prof_lucas",
+      "name": "Aluno Silva",
+      "whatsapp": "1199998888",
+      "level": "Não informado",
+      "goal": "Geral",
+      "preferredTime": "Flexível",
+      "planChosen": "A definir",
+      "value": 0,
+      "origin": "TikTok",
+      "status": "novo",
+      "createdAt": "2026-11-20T17:16:19.765Z"
+    },
+    {
+      "id": "lead_1795194978804",
+      "teacherId": "prof_lucas",
+      "name": "Aluno Teste TikTok",
+      "whatsapp": "(11) 99999-8888",
+      "level": "Iniciante",
+      "goal": "Geral",
+      "preferredTime": "Noite",
+      "planChosen": "Inglês Viagem",
+      "value": 380,
+      "origin": "TikTok @teacherlucas.ingles",
+      "status": "novo",
+      "createdAt": "2026-11-20T17:16:18.804Z"
+    },
+    {
+      "id": "lead_1795194968109",
+      "teacherId": "prof_lucas",
+      "name": "Aluno Silva",
+      "whatsapp": "1199998888",
+      "level": "Não informado",
+      "goal": "Geral",
+      "preferredTime": "Flexível",
+      "planChosen": "A definir",
+      "value": 0,
+      "origin": "TikTok",
+      "status": "novo",
+      "createdAt": "2026-11-20T17:16:08.109Z"
+    },
+    {
+      "id": "lead_1795194851331",
+      "teacherId": "prof_lucas",
+      "name": "Aluno Teste TikTok",
+      "whatsapp": "(11) 99999-8888",
+      "level": "Iniciante",
+      "goal": "Geral",
+      "preferredTime": "Noite",
+      "planChosen": "Inglês Viagem",
+      "value": 380,
+      "origin": "TikTok @teacherlucas.ingles",
+      "status": "novo",
+      "createdAt": "2026-11-20T17:14:11.331Z"
+    },
+    {
+      "id": "lead_1795193054061",
+      "teacherId": "prof_lucas",
+      "name": "Aluno Teste TikTok",
+      "whatsapp": "(11) 99999-8888",
+      "level": "Iniciante",
+      "goal": "Geral",
+      "preferredTime": "Noite",
+      "planChosen": "Inglês Viagem",
+      "value": 380,
+      "origin": "TikTok @teacherlucas.ingles",
+      "status": "novo",
+      "createdAt": "2026-11-20T16:44:14.061Z"
+    },
     {
       "id": "lead_1795192575633",
       "teacherId": "prof_lucas",

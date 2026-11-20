@@ -165,27 +165,56 @@
   <script>
     const MASTER_PIN = '2026';
 
+    function getAdminPin() {
+      return sessionStorage.getItem('docentepro_admin_pin') || MASTER_PIN;
+    }
+
     function unlockAdmin(e) {
       e.preventDefault();
-      const input = document.getElementById('admin-pin').value;
-      if (input === MASTER_PIN) {
-        document.getElementById('pin-lock-screen').classList.add('hidden');
-        sessionStorage.setItem('docentepro_admin_auth', '1');
-        loadData();
+      const input = document.getElementById('admin-pin').value.trim();
+      if (input) {
+        sessionStorage.setItem('docentepro_admin_pin', input);
+        loadData().then(success => {
+          if (success) {
+            document.getElementById('pin-lock-screen').classList.add('hidden');
+            sessionStorage.setItem('docentepro_admin_auth', '1');
+            document.getElementById('pin-error').classList.add('hidden');
+          } else {
+            document.getElementById('pin-error').innerText = "PIN incorreto ou bloqueado. Tente novamente.";
+            document.getElementById('pin-error').classList.remove('hidden');
+            sessionStorage.removeItem('docentepro_admin_auth');
+            sessionStorage.removeItem('docentepro_admin_pin');
+          }
+        });
       } else {
+        document.getElementById('pin-error').innerText = "Digite o PIN master para continuar.";
         document.getElementById('pin-error').classList.remove('hidden');
       }
     }
 
     if (sessionStorage.getItem('docentepro_admin_auth') === '1') {
-      document.getElementById('pin-lock-screen').classList.add('hidden');
-      loadData();
+      loadData().then(success => {
+        if (success) {
+          document.getElementById('pin-lock-screen').classList.add('hidden');
+        } else {
+          document.getElementById('pin-lock-screen').classList.remove('hidden');
+        }
+      });
     }
 
     async function loadData() {
       try {
-        const res = await fetch('/api/saas/summary');
+        const pin = getAdminPin();
+        const res = await fetch('/api/saas/summary', {
+          headers: { 'x-admin-pin': pin }
+        });
+
+        if (res.status === 401 || res.status === 403) {
+          return false;
+        }
+
         const data = await res.json();
+        if (!data || !data.metrics) return false;
 
         document.getElementById('mrr-val').innerText = `R$ ${data.metrics.totalSaaSMrr.toFixed(2)} / mês`;
         document.getElementById('potential-mrr').innerText = `R$ ${data.metrics.totalPotentialMrr.toFixed(2)} / mês`;
@@ -221,19 +250,27 @@
           `;
           tbody.appendChild(tr);
         });
-
+        return true;
       } catch (err) {
         console.error('Erro ao carregar admin:', err);
+        return false;
       }
     }
 
-    function openSaasPixModal() {
-      fetch('/api/saas/summary').then(r => r.json()).then(data => {
+    async function openSaasPixModal() {
+      const pin = getAdminPin();
+      const res = await fetch('/api/saas/summary', {
+        headers: { 'x-admin-pin': pin }
+      });
+      if (res.ok) {
+        const data = await res.json();
         document.getElementById('saas-pix-key').value = data.saas.pixKey || 'luklen2@gmail.com';
         document.getElementById('saas-pix-name').value = data.saas.pixName || 'LUCIANO SAAS';
         document.getElementById('saas-pix-city').value = data.saas.pixCity || 'SAO PAULO';
         document.getElementById('modal-saas-pix').classList.remove('hidden');
-      });
+      } else {
+        alert('Acesso não autorizado ao painel financeiro.');
+      }
     }
 
     function closeSaasPixModal() {
@@ -242,6 +279,7 @@
 
     async function saveSaasPix(e) {
       e.preventDefault();
+      const pin = getAdminPin();
       const payload = {
         pixKey: document.getElementById('saas-pix-key').value,
         pixName: document.getElementById('saas-pix-name').value,
@@ -249,11 +287,17 @@
       };
 
       try {
-        await fetch('/api/saas/config', {
+        const res = await fetch('/api/saas/config', {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'x-admin-pin': pin
+          },
           body: JSON.stringify(payload)
         });
+        if (!res.ok) {
+          throw new Error('Falha de autenticação ao atualizar chave.');
+        }
         alert('Sua Chave PIX pessoal foi atualizada com sucesso!');
         closeSaasPixModal();
         loadData();
@@ -261,6 +305,7 @@
         alert('Erro ao salvar: ' + err.message);
       }
     }
+  </script>
   </script>
 </body>
 </html>

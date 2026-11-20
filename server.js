@@ -4,6 +4,17 @@ const fs = require("fs");
 const path = require("path");
 const { readDb, writeDb } = require("./db");
 const { generatePixPayload, getPixQrCodeUrl } = require("./pix_utils");
+const {
+  MASTER_PIN,
+  globalLimiter,
+  writeLimiter,
+  authLimiter,
+  getClientIp,
+  applySecurityHeaders,
+  sanitizeObject,
+  isPathSafe,
+  verifyAdminAuth,
+} = require("./security");
 
 let currentPort = parseInt(process.env.PORT, 10) || 3002;
 const APP_NAME = "DocentePro";
@@ -23,9 +34,13 @@ const MIME_TYPES = {
   ".mp3": "audio/mpeg",
   ".wav": "audio/wav",
   ".pdf": "application/pdf",
+  ".woff": "font/woff",
+  ".woff2": "font/woff2",
+  ".ttf": "font/ttf",
+  ".txt": "text/plain; charset=utf-8",
 };
 
-// Helper: parse JSON body
+// Helper: parse JSON body com Sanitização Anti-XSS e Proteção contra DoS
 function parseBody(req) {
   return new Promise((resolve, reject) => {
     let body = "";
@@ -33,13 +48,14 @@ function parseBody(req) {
       body += chunk.toString();
       if (body.length > 5 * 1024 * 1024) {
         // 5MB limit
-        reject(new Error("Payload too large"));
+        reject(new Error("Payload muito grande. Limite de 5MB excedido."));
       }
     });
     req.on("end", () => {
       if (!body.trim()) return resolve({});
       try {
-        resolve(JSON.parse(body));
+        const parsed = JSON.parse(body);
+        resolve(sanitizeObject(parsed));
       } catch (err) {
         reject(new Error("JSON Inválido: " + err.message));
       }
@@ -48,13 +64,14 @@ function parseBody(req) {
   });
 }
 
-// Helper: send JSON response
+// Helper: send JSON response com Cabeçalhos de Cibersegurança
 function sendJson(res, statusCode, data) {
+  applySecurityHeaders(res);
   res.writeHead(statusCode, {
     "Content-Type": "application/json; charset=utf-8",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, x-admin-pin",
   });
   res.end(JSON.stringify(data));
 }
@@ -67,16 +84,40 @@ const server = http.createServer(async (req, res) => {
   );
   const pathname = parsedUrl.pathname;
   const method = req.method;
+  const clientIp = getClientIp(req);
+
+  // Injeção de Cabeçalhos de Segurança em todas as respostas
+  applySecurityHeaders(res, req);
 
   // Handle CORS Pre-flight
   if (method === "OPTIONS") {
     res.writeHead(204, {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization, x-admin-pin",
     });
     res.end();
     return;
+  }
+
+  // Rate Limiting Global: Anti-DDoS e Anti-Scraping (400 req / 15 min)
+  if (globalLimiter.isLimited(clientIp)) {
+    sendJson(res, 429, {
+      error: "Muitas requisições deste endereço IP. Aguarde alguns instantes.",
+      retryAfter: globalLimiter.getResetTimeSeconds(clientIp),
+    });
+    return;
+  }
+
+  // Rate Limiting para Escritas: Anti-Flood de formulários e cadastros (40 req / 15 min)
+  if (["POST", "PUT", "DELETE"].includes(method)) {
+    if (writeLimiter.isLimited(clientIp)) {
+      sendJson(res, 429, {
+        error: "Limite de envio de dados excedido. Tente novamente mais tarde.",
+        retryAfter: writeLimiter.getResetTimeSeconds(clientIp),
+      });
+      return;
+    }
   }
 
   // 1. Mandatory Health Check (Luciano SaaS standard)
@@ -95,8 +136,20 @@ const server = http.createServer(async (req, res) => {
   // 2. REST API ENDPOINTS
   // ==========================================
 
-  // GET /api/saas/summary -> Resumo executivo do SaaS do Luciano
+  // GET /api/saas/summary -> Resumo executivo do SaaS do Luciano (Protegido por PIN Master)
   if (pathname === "/api/saas/summary" && method === "GET") {
+    if (!verifyAdminAuth(req)) {
+      if (authLimiter.isLimited(clientIp)) {
+        sendJson(res, 429, {
+          error: "Muitas tentativas de autenticação inválidas. Aguarde 15 minutos.",
+        });
+        return;
+      }
+      sendJson(res, 401, {
+        error: "Não autorizado: PIN Master obrigatório para visualizar métricas confidenciais do proprietário.",
+      });
+      return;
+    }
     const db = readDb();
     const teachers = db.teachers || [];
     const students = db.students || [];
@@ -221,8 +274,15 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // PUT /api/saas/config -> Luciano atualiza sua própria Chave PIX para receber os R$ 39,90
+  // PUT /api/saas/config -> Luciano atualiza sua própria Chave PIX para receber os R$ 39,90 (Protegido por PIN Master)
   if (pathname === "/api/saas/config" && method === "PUT") {
+    if (!verifyAdminAuth(req)) {
+      sendJson(res, 401, {
+        error: "Não autorizado: PIN Master obrigatório para alterar a Chave PIX do proprietário.",
+      });
+      return;
+    }
+
     try {
       const body = await parseBody(req);
       const db = readDb();
@@ -746,7 +806,7 @@ const server = http.createServer(async (req, res) => {
 
   // ==========================================
   // 3. RESOLUÇÃO UNIVERSAL DE ARQUIVOS ESTÁTICOS
-  //    (Suporte a public/, raiz e fallback SPA)
+  //    (Suporte a public/, raiz, fallback SPA e Firewall Anti-Vazamento)
   // ==========================================
   let targetFile =
     pathname === "/" ? "index.html" : pathname.replace(/^\//, "");
@@ -756,6 +816,14 @@ const server = http.createServer(async (req, res) => {
   if (targetFile === "privacidade") targetFile = "privacidade.html";
   if (targetFile === "admin") targetFile = "admin.html";
   if (targetFile === "landing") targetFile = "landing.html";
+
+  // Firewall Anti-Path-Traversal & Proteção contra Vazamento de Banco/Código
+  if (!isPathSafe(targetFile)) {
+    applySecurityHeaders(res, req);
+    res.writeHead(403, { "Content-Type": "text/plain; charset=utf-8" });
+    res.end("403 Acesso Negado - Arquivo protegido pelo firewall de cibersegurança do DocentePro");
+    return;
+  }
 
   const candidatePaths = [
     path.join(__dirname, "public", targetFile),
@@ -777,6 +845,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (filePath && fs.existsSync(filePath)) {
+    applySecurityHeaders(res, req);
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || "application/octet-stream";
     res.writeHead(200, { "Content-Type": contentType });
@@ -785,6 +854,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   // 404 Not Found
+  applySecurityHeaders(res, req);
   res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
   res.end("404 Não Encontrado - DocentePro");
 });
