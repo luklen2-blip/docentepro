@@ -83,7 +83,7 @@
           "active": true
         }
       ],
-      "subscriptionPaidDate": "2026-11-20T15:42:49.339Z"
+      "subscriptionPaidDate": "2026-11-20T15:54:51.301Z"
     },
     {
       "id": "prof_camila",
@@ -272,6 +272,20 @@
     }
   ],
   "leads": [
+    {
+      "id": "lead_1795190091289",
+      "teacherId": "prof_lucas",
+      "name": "Aluno Teste TikTok",
+      "whatsapp": "(11) 99999-8888",
+      "level": "Iniciante",
+      "goal": "Geral",
+      "preferredTime": "Noite",
+      "planChosen": "Inglês Viagem",
+      "value": 380,
+      "origin": "TikTok @teacherlucas.ingles",
+      "status": "novo",
+      "createdAt": "2026-11-20T15:54:51.289Z"
+    },
     {
       "id": "lead_1795189369329",
       "teacherId": "prof_lucas",
